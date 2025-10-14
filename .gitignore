@@ -1,0 +1,40 @@
+# General files
+.DS_Store
+.vscode
+
+## Generated output
+*.pdf
+*.jpeg
+*.jpg
+*.png
+*.eps
+*.svg
+
+# QIIME
+.qza
+.qzv
+
+# TeX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.synctex.gz
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.bcf-SAVE-ERROR
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
