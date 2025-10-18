@@ -11,8 +11,8 @@
 *.svg
 
 # QIIME
-.qza
-.qzv
+*.qza
+*.qzv
 
 # TeX
 *.aux
