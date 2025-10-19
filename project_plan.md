@@ -1,6 +1,12 @@
 # MicrobEvolve2 - Project Plan
 
-# Step 1: Import, Denoising (Week 3)
+# Step 1: Import, Quality Control, Denoising (Week 3)
+Importing demultiplexed data
+Importing metadata per_sample and per_age as separate .tsv files
+Quality control and Denoising
+Decide: 
+- trunction length (for forward and reverse sequences)
+- minimal overlap of forward and reversed reads
 
 # Step 2: Taxonomic classification (Week 5)
 
