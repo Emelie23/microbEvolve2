@@ -4,29 +4,30 @@
 #I installed openpyxl into microbEvolve environment
 
 #Create directories microbEvolve and Data to store the data into SCRATCH
-mkdir -p "$HOME/microbEvolve2/data"
+mkdir -p "$HOME/microbEvolve2/data/raw"
+mkdir -p "$HOME/microbEvolve2/data/processed"
 
 #Create data directory variable
 data_dir="$HOME/microbEvolve2/data"
 
 #Import data
-wget -O "$data_dir/demux_paired_end.qza" \
+wget -O "$data_dir/raw/demux_paired_end.qza" \
     "https://polybox.ethz.ch/index.php/s/zi5ZBrBwcn7SYof/download/demux-paired-end.qza"
 
-wget -O "$data_dir/metadata.xlsx" \
+wget -O "$data_dir/processed/metadata.xlsx" \
     "https://polybox.ethz.ch/index.php/s/YQQggAqcQCApJmQ/download"
 
 # Export metadata into single .tsv files
 python3 <<EOF
 import pandas as pd
 
-df = pd.read_excel("$data_dir/metadata.xlsx", sheet_name="DataDictionary")
+df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="DataDictionary")
 df.to_csv("$data_dir/metadata_dictionary.tsv", sep="\t", index=False)
 
-df = pd.read_excel("$data_dir/metadata.xlsx", sheet_name="metadata_per_sample")
+df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="metadata_per_sample")
 df.to_csv("$data_dir/metadata_per_sample.tsv", sep="\t", index=False)
 
-df = pd.read_excel("$data_dir/metadata.xlsx", sheet_name="metadata_per_age")
+df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="metadata_per_age")
 df.to_csv("$data_dir/metadata_per_age.tsv", sep="\t", index=False)
 
 EOF
