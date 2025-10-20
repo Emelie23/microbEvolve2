@@ -3,12 +3,12 @@
 #Actvate conda environment before running the shell script
 #I installed openpyxl into microbEvolve environment
 
-#Create directories microbEvolve and Data to store the data into SCRATCH
-mkdir -p "$HOME/microbEvolve2/data/raw"
-mkdir -p "$HOME/microbEvolve2/data/processed"
-
 #Create data directory variable
 data_dir="$HOME/microbEvolve2/data"
+
+#Create directories microbEvolve and Data to store the data into $HOME
+mkdir -p "$data_dir/raw"
+mkdir -p "$data_dir/processed"
 
 #Import data
 wget -O "$data_dir/raw/demux_paired_end.qza" \
@@ -22,12 +22,12 @@ python3 <<EOF
 import pandas as pd
 
 df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="DataDictionary")
-df.to_csv("$data_dir/metadata_dictionary.tsv", sep="\t", index=False)
+df.to_csv("$data_dir/raw/metadata_dictionary.tsv", sep="\t", index=False)
 
 df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="metadata_per_sample")
-df.to_csv("$data_dir/metadata_per_sample.tsv", sep="\t", index=False)
+df.to_csv("$data_dir/raw/metadata_per_sample.tsv", sep="\t", index=False)
 
 df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="metadata_per_age")
-df.to_csv("$data_dir/metadata_per_age.tsv", sep="\t", index=False)
+df.to_csv("$data_dir/raw/metadata_per_age.tsv", sep="\t", index=False)
 
 EOF
