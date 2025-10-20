@@ -14,7 +14,7 @@ data_dir="$HOME/microbEvolve2/data"
 wget -O "$data_dir/raw/demux_paired_end.qza" \
     "https://polybox.ethz.ch/index.php/s/zi5ZBrBwcn7SYof/download/demux-paired-end.qza"
 
-wget -O "$data_dir/processed/metadata.xlsx" \
+wget -O "$data_dir/raw/metadata.xlsx" \
     "https://polybox.ethz.ch/index.php/s/YQQggAqcQCApJmQ/download"
 
 # Export metadata into single .tsv files
