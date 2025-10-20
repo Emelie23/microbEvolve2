@@ -8,6 +8,15 @@ Decide:
 - trunction length (for forward and reverse sequences)
 - minimal overlap of forward and reversed reads
 
+Ask TA on wednesday:
+- what variability is acceptable? 
+- try different truncation lengths and do the denoising
+- keep the overlap constant and vary the trunc-len
+
+- does my qza file have information about metadata sample id?
+
+- what does the variable: number of sample tell su
+
 # Step 2: Taxonomic classification (Week 5)
 
 In case we want to use SILVA as ref database to train our model:
