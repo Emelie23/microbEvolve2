@@ -28,7 +28,7 @@
 % Makes header
 \pagestyle{fancy}
 % \thispagestyle{empty}
-\fancyhead[R]{\includegraphics[height=1cm]{/Users/flurinschindele/Documents/ETH/ETH-Logo-kurz/eth_logo_kurz_pos.png}}
+%\fancyhead[R]{\includegraphics[height=1cm]{/Users/flurinschindele/Documents/ETH/ETH-Logo-kurz/eth_logo_kurz_pos.png}}
 \fancyhead[L]{}
 % Makes footnotes with an asterisk
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
@@ -65,14 +65,31 @@
 \end{@twocolumnfalse}
 ]
 
-\tableofcontents
+%\tableofcontents
 
 % TEXT ----
 
 % HINTS ----
 % Please use the figure* (or table*) environment instead of figure to include
 % page-wide graphics. Figure will use column-wide graphics.
+\section*{Introduction}
 
+\section*{Progress and Results}
+In the initial phase, we spent considerable time on the setup, ensuring that all group members could collaborate, work within the same environment, and access the Euler cluster.\\
+The first step of the analysis involved importing the DNA sequences along with their corresponding metadata.
+The sequences are paired-end originating from the V4 region of the 16S rRNA gene, already demultiplexed and provided as a QIIME 2 artifact.
+The metadata was provided in an Excel file containing multiple sheets containing metadata per sample and age. 
+We extracted each sheet into a separate .tsv file to enable further processing with QIIME 2.\\
+After importing, we performed quality control, which indicated that the data is very clean and likely already pre-processed.
+The sequence quality was generally very high for both forward and reverse reads.
+The median quality score for the forward reads was 34 across all bases, with variability beginning to increase from position 295 onward (see Figure X).
+In the reverse reads, the median quality score remained 34 up to position 295, and dropped to 20 for the remaining bases.
+The variability was higher overall in the reversed reads and increased substantially from position 221 onward (see Figure X).\\
+We decided to perform denoising multiple times with varying truncation lengths and minimum overlap and based on the results select the optimal parameters.
+To start, we first examined the used sequencing primers X and X, which targeted an amplicon of X bp.
+Both forward and reverse reads in our samples were 301 bp long, resulting in a theoretical overlap of 198 bp. 
+Due to the high overlap and consistently high quality scores across the reads, we performed one denoising run without truncation and set the minimum overlap to 50 bp.
+At the other extreme, we truncated forward and reverse reads at the first base where the 25th percentile quality score dropped below 34 (forward = 300 bp, reverse = 218 bp) using the default 12 bp overlap.\\
 
 %BIBLIOGRAPHY---
 % \begingroup
