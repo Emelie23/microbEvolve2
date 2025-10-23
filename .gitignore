@@ -1,6 +1,7 @@
 # General files
 .DS_Store
 .vscode
+slurm-*
 
 ## Generated output
 *.pdf
