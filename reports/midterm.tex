@@ -19,6 +19,9 @@
 \usepackage{booktabs, multirow}
 \usepackage{amsmath}
 
+\usepackage[style=numeric, sorting=nyt, url=false, isbn=false, backend=biber]{biblatex}
+\addbibresource{./microbEvolve2.bib}
+
 \renewenvironment{abstract} % Sets abstract
  {\par\noindent\textbf{\abstractname}\ \ignorespaces \\}
  {\par\noindent\medskip}
@@ -28,7 +31,7 @@
 % Makes header
 \pagestyle{fancy}
 % \thispagestyle{empty}
-%\fancyhead[R]{\includegraphics[height=1cm]{/Users/flurinschindele/Documents/ETH/ETH-Logo-kurz/eth_logo_kurz_pos.png}}
+\fancyhead[R]{\includegraphics[height=1cm]{misc/eth_logo_kurz_pos.png}}
 \fancyhead[L]{}
 % Makes footnotes with an asterisk
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
@@ -42,12 +45,12 @@
 \vspace{0.4cm}
 \normalsize
 \begin{tabular}{rl}
-    Flurin Schindele & \texttt{fschindele@ethz.ch} \\
-    Yara Roth & \texttt{rothya@ethz.ch} \\
-    Emelie Guggisberg & \texttt{eguggisberg@ethz.ch}
+  Yara Roth & \texttt{rothya@ethz.ch} \\
+  Flurin Schindele & \texttt{fschindele@ethz.ch} \\
+  Emelie Guggisberg & \texttt{eguggisberg@ethz.ch}
 \end{tabular} \\
 \vspace{0.1cm}
-\textit{ETH Zurich}
+% \textit{ETH Zurich}
 %\small{Other Location}
 \medskip
 \normalsize
@@ -72,29 +75,84 @@
 % HINTS ----
 % Please use the figure* (or table*) environment instead of figure to include
 % page-wide graphics. Figure will use column-wide graphics.
-\section*{Introduction}
+\subsection*{Introduction}
 
-\section*{Progress and Results}
+Our project studies how the gut microbiome of infants changes during the first six months of life and whether these changes relate to behavioral development and sleep patterns.
+We analyze samples taken at 2, 4, and 6 months to track how microbial composition and diversity develop over time.
+By linking these microbial trends with measures of sleep rhythm, sleep quality, and behavioral development, we aim to explore possible connections between early gut development and infant well-being.
+We will determine trajectories of the microbiome development — which is expected to become more diverse and stable \cite{bokulich2016AntibioticsBirthMode} — and investigate how they differ between groups of infants based on developmental delays and sleep quality.
+
+\subsection*{Progress and Results}
+
 In the initial phase, we spent considerable time on the setup, ensuring that all group members could collaborate, work within the same environment, and access the Euler cluster.\\
 The first step of the analysis involved importing the DNA sequences along with their corresponding metadata.
-The sequences are paired-end originating from the V4 region of the 16S rRNA gene, already demultiplexed and provided as a QIIME 2 artifact.
-The metadata was provided in an Excel file containing multiple sheets containing metadata per sample and age. 
-We extracted each sheet into a separate .tsv file to enable further processing with QIIME 2.\\
+The sequences are paired-end originating from the V4 region of the 16S rRNA gene, already demultiplexed and provided as a QIIME2 artifact.
+The metadata was provided in an Excel file containing multiple sheets containing metadata per sample and age, which we extracted into separate .tsv files. 
+% We extracted each sheet into a separate .tsv file to enable further processing with QIIME2.\\
 After importing, we performed quality control, which indicated that the data is very clean and likely already pre-processed.
 The sequence quality was generally very high for both forward and reverse reads.
-The median quality score for the forward reads was 34 across all bases, with variability beginning to increase from position 295 onward (see Figure X).
-In the reverse reads, the median quality score remained 34 up to position 295, and dropped to 20 for the remaining bases.
-The variability was higher overall in the reversed reads and increased substantially from position 221 onward (see Figure X).\\
-We decided to perform denoising multiple times with varying truncation lengths and minimum overlap and based on the results select the optimal parameters.
-To start, we first examined the used sequencing primers X and X, which targeted an amplicon of X bp.
-Both forward and reverse reads in our samples were 301 bp long, resulting in a theoretical overlap of 198 bp. 
-Due to the high overlap and consistently high quality scores across the reads, we performed one denoising run without truncation and set the minimum overlap to 50 bp.
-At the other extreme, we truncated forward and reverse reads at the first base where the 25th percentile quality score dropped below 34 (forward = 300 bp, reverse = 218 bp) using the default 12 bp overlap.\\
+% The median quality score for the forward reads was 34 across all bases, with variability beginning to increase from position 295 onward (see Figure X).
+% In the reverse reads, the median quality score remained 34 up to position 295, and dropped to 20 for the remaining bases.
+The variability was higher overall in the reversed reads and increased substantially from position 221 onward (see Figure \ref{fig:qc}).\\
+Due to the length of the reads, we made sure that the primers (515F and 806R) were not present in our reads by running cutadapt.
+We decided to perform denoising multiple times with varying truncation lengths and minimum overlap, and based on the results, select the optimal parameters.
+% To start, we first examined the used sequencing primers X and X, which targeted an amplicon of X bp.
+% Both forward and reverse reads in our samples were 301 bp long, resulting in a theoretical overlap of 198 bp. 
+% Due to the high overlap and consistently high quality scores across the reads, we performed one denoising run without truncation and set the minimum overlap to 50 bp.
+% At the other extreme, we truncated forward and reverse reads at the first base where the 25th percentile quality score dropped below 34 (forward = 300 bp, reverse = 218 bp) using the default 12 bp overlap.\\
+The results of denoising will be discussed with our instructor.
+
+\subsection*{Project Plan}
+
+The timeline of our project is visible in Figure \ref{fig:GanttChart}.
+The immediate next steps will involve merging the available metadata with each other and the ASV feature table.
+This will give us more insight into important aspects of our data.
+This includes how many usable observations we have per time point, if only a few infants have been sampled over the entire study period, and how well the outcome measures can be integrated.
+Next, taxonomic analysis and diversity analysis will be performed. 
+We will need to evaluate the available reference databases and classifiers before deciding on a method. 
+Phylogenetic analysis is not planned at this point; we tend towards utilizing a k-mer-based approach for calculating diversity metrics that take evolutionary history into account. 
+We plan to complete these steps by the end of week 8 at the latest (see Figure \ref{fig:GanttChart}).
+
+After the foundational work, we can then start exploring our data in different directions.
+A starting point will be to look into potential correlations of diversity metrics and the behavioral and sleep quality outcome measures.
+Significant aspects discovered here can be examined more in depth, using statistical tests and looking for confirming/contradicting literature.
+
+We also want to look into temporal changes in the microbiome composition.
+Visual inspection of sample composition and investigating relative abundance in all samples over time might reveal characteristic trajectories that all infants follow.
+It will be interesting if we can infer changes in lifestyle, such as the introduction of solid foods or increased environmental exposure, to the temporal trends in combination with functional prediction of the microbial communities.
+
+Another pillar of our project will be to use unsupervised learning to explore the data further. 
+Techniques such as (H)DBSCAN but also simple approaches like UMAP might reveal clusters of microbiome composition.
+We can then try to relate these clusters to our outcome measures and find trends in composition that relate to differences in sleep quality or behavior.
+
+We also want to focus on investigating whether we can predict the continuous outcome variables (sleep and development metrics) with the microbiome composition.
+Here we would likely need to look into dimensionality reduction or feature selection techniques in order to extract meaningful results from our data.
+Techniques like Random Forests or regression variants might even give insights into whether specific features play central roles in determining the outcome score.
+
+The last three weeks are reserved for preparing the presentation and writing the report, as well as integrating the feedback from our peers and cleaning up the codebase.
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{misc/qc_bases.jpg}
+  \caption{Quality score per base position}
+  \label{fig:qc}
+\end{figure*}
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=1\textwidth, trim={2cm 2.5cm 2cm 2.5cm}, clip]{misc/GanttChart.pdf}
+  \caption{Project Timeline}
+  \label{fig:GanttChart}
+\end{figure*}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
 
 %BIBLIOGRAPHY---
-% \begingroup
-% \bibliographystyle{plain}
-% \bibliography{references}
-% \endgroup
+\pagebreak
+\printbibliography
+
+\end{@twocolumnfalse}
+]
 
 \end{document}
