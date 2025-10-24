@@ -10,10 +10,12 @@ slurm-*
 *.png
 *.eps
 *.svg
+!reports/misc/*
 
 # QIIME
 *.qza
 *.qzv
+data/
 
 # TeX
 *.aux
