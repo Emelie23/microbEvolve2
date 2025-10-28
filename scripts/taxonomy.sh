@@ -12,13 +12,13 @@ log "Starting taxonomy classification script"
 data_dir="$HOME/microbEvolve2/data"
 
 # Check if required input file exists
-if [[ ! -f "$data_dir/raw/dada2_rep_set_1.qza" ]]; then
-    log "ERROR: Required input file not found: $data_dir/raw/dada2_rep_set_1.qza"
+if [[ ! -f "$data_dir/raw/dada2_rep_set.qza" ]]; then
+    log "ERROR: Required input file not found: $data_dir/raw/dada2_rep_set.qza"
     log "Please ensure the denoising step has been completed successfully."
     exit 1
 fi
 
-log "Input file verified: $data_dir/raw/dada2_rep_set_1.qza"
+log "Input file verified: $data_dir/raw/dada2_rep_set.qza"
 
 # Check if classifier files exist
 missing_classifiers=false
@@ -58,35 +58,52 @@ log "Starting taxonomic classification with weighted classifier..."
 
 qiime feature-classifier classify-sklearn \
     --i-classifier "$data_dir/raw/silva-138-99-515-806-nb-classifier-weighted-stool.qza" \
-    --i-reads $data_dir/raw/dada2_rep_set_1.qza \
+    --i-reads $data_dir/raw/dada2_rep_set.qza \
     --p-n-jobs 0 \
     --p-reads-per-batch 2000 \
     --verbose \
-    --o-classification $data_dir/raw/taxonomy_1_weighted_stool.qza
+    --o-classification $data_dir/raw/taxonomy_weighted_stool.qza
 
 log "Weighted taxonomic classification completed"
 log "Creating visualization for weighted taxonomy results..."
 
 qiime metadata tabulate \
-    --m-input-file $data_dir/raw/taxonomy_1_weighted_stool.qza \
-    --o-visualization $data_dir/processed/taxonomy_1_weighted_stool.qzv
-
+    --m-input-file $data_dir/raw/taxonomy_weighted_stool.qza \
+    --o-visualization $data_dir/processed/taxonomy_weighted_stool.qzv
 log "Weighted taxonomy visualization created"
+
+log "Creating taxa bar plot for weighted taxonomy results..."
+qiime taxa barplot \
+    --i-table $data_dir/raw/dada2_table.qza \
+    --i-taxonomy $data_dir/raw/taxonomy_weighted_stool.qza \
+    --m-metadata-file $data_dir/raw/metadata_per_sample.tsv \
+    --o-visualization $data_dir/processed/taxa-bar-plots_weighted.qzv
+log "Taxa bar plot for weighted taxonomy results created"
 
 log "Starting taxonomic classification with unweighted classifier..."
 
 qiime feature-classifier classify-sklearn \
     --i-classifier "$data_dir/raw/silva-138-99-515-806-nb-classifier-unweighted.qza" \
-    --i-reads $data_dir/raw/dada2_rep_set_1.qza \
+    --i-reads $data_dir/raw/dada2_rep_set.qza \
     --p-n-jobs 0 \
-    --o-classification $data_dir/raw/taxonomy_1_unweighted.qza
+    --p-reads-per-batch 2000 \
+    --o-classification $data_dir/raw/taxonomy_unweighted.qza
 
 log "Unweighted taxonomic classification completed"
 log "Creating visualization for unweighted taxonomy results..."
 
 qiime metadata tabulate \
-    --m-input-file $data_dir/raw/taxonomy_1_unweighted.qza \
-    --o-visualization $data_dir/processed/taxonomy_1_unweighted.qzv
+    --m-input-file $data_dir/raw/taxonomy_unweighted.qza \
+    --o-visualization $data_dir/processed/taxonomy_unweighted.qzv
 
 log "Unweighted taxonomy visualization created"
+
+log "Creating taxa bar plot for unweighted taxonomy results..."
+qiime taxa barplot \
+    --i-table $data_dir/raw/dada2_table.qza \
+    --i-taxonomy $data_dir/raw/taxonomy_unweighted.qza \
+    --m-metadata-file $data_dir/raw/metadata_per_sample.tsv \
+    --o-visualization $data_dir/processed/taxa-bar-plots_unweighted.qzv
+log "Taxa bar plot for unweighted taxonomy results created"
+
 log "Taxonomy classification script completed successfully!"
