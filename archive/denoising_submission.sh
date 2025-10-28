@@ -4,19 +4,18 @@
 #SBATCH --time=03:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=64G
+#SBATCH --mem-per-cpu=32G
 #SBATCH --output=slurm-%j.out
 #SBATCH --error=slurm-%j.err
-#SBATCH --mail-type=END,FAIL
 
 start_time=$(date +%s)
 
 source $HOME/.bashrc
 conda activate microbEvolve
 
-bash $HOME/microbEvolve2/scripts/denoising.sh
+python3 -u $HOME/microbEvolve2/scripts/denoising.py
 
-# Check if the script executed successfully
+# Check if the Python script executed successfully
 if [ $? -eq 0 ]; then
     echo "Denoising script completed successfully at $(date)"
 else
