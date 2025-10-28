@@ -25,6 +25,7 @@ df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="DataDictionary")
 df.to_csv("$data_dir/raw/metadata_dictionary.tsv", sep="\t", index=False)
 
 df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="metadata_per_sample")
+df.rename(columns={"Unnamed: 0": "sampleid"}, inplace=True)
 df.to_csv("$data_dir/raw/metadata_per_sample.tsv", sep="\t", index=False)
 
 df = pd.read_excel("$data_dir/raw/metadata.xlsx", sheet_name="metadata_per_age")
