@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Importing demultiplexed data, which is already provided as QIIME2 artifact.
-#importing metadata and converting sheets into single .tsv files (per_age and per_sample). First column ["Unnamed 0"] of metadata_per_sample is renamed into sampleid.
+#Importing metadata and converting sheets into single .tsv files (per_age and per_sample). First column ["Unnamed 0"] of metadata_per_sample is renamed into sampleid.
 
 #Activate conda environment (microbEvolve) before running the shell script
 #Install openpyxl into microbEvolve environment
