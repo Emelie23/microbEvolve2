@@ -83,6 +83,14 @@ microbEvolve2/
 
 ## Documentation
 
+### Metadata
+
+- **Sample Number**:
+
+    `sample_number` in the `data/raw/metadata_per_sample.tsv` file refers to the order of the sample from an infant at a time point. The pediatrician takes as many samples from the infant as possible (which depends on how often it poops) and the number indicates the order.
+    We can look at changes in the composition between these samples, as the microbiome usually fluctuates depending on food intake and other factors.
+    We can use those samples in other analyses by either using all samples and controlling for the infant or by defining a reference microbiome for this time point, for example using the average or median abundance of taxa.
+
 ### Denoising
 
 #### Cutadapt
