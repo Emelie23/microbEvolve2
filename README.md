@@ -1,0 +1,117 @@
+# MicrobEvolve2
+
+An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencing data processing and analysis.
+
+## Project Overview
+
+<!-- TODO -->
+
+## Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Emelie23/microbEvolve2.git
+   cd microbEvolve2
+   ```
+
+2. **Install minconda:**
+   See [installation instructions](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) for your platform.
+
+3. **Create and activate the conda environment:**
+
+    For macOS:
+
+    ```bash
+    conda env create \
+        --name microbEvolve \
+        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.7/amplicon/released/qiime2-amplicon-macos-latest-conda.yml
+    conda activate microbEvolve
+    conda config --env --set subdir osx-64
+    conda install openpyxl
+    ```
+
+    For Linux:
+
+    ```bash
+    conda env create \
+        --name microbEvolve \
+        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.7/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml
+    conda activate microbEvolve
+    conda install openpyxl
+    ```
+
+    In case openpyxl installation fails, try installing with pip (`pip install openpyxl`).
+
+4. **Verify installation:**
+
+    ```bash
+    qiime --version
+    ```
+
+## Project Structure
+
+```
+microbEvolve2/
+├── README.md                  # This file
+├── project_plan.md            # (Detailed) project planning
+├── data/                      # Data files
+│   ├── raw/                   # Raw QIIME2 artifacts (.qza files)
+│   └── processed/             # Processed visualizations (.qzv files)
+├── scripts/                   # Analysis scripts
+│   ├── importing.sh           # Data import scripts
+│   ├── quality_control.sh     # Quality control analysis
+│   ├── cutadapt.sh            # Primer trimming
+│   ├── denoising.sh           # DADA2 denoising
+│   └── taxonomy.sh            # Taxonomic classification
+├── reports/                   # Reports
+└── archive/                   # Archived scripts and old versions
+```
+
+## Usage
+
+### Quick Start
+
+1. **Activate the environment:**
+   ```bash
+   conda activate microbevolve2
+   ```
+
+2. **Run the analysis pipeline:**
+<!-- TODO -->
+
+---
+
+## Documentation
+
+### Denoising
+
+#### Cutadapt
+
+Because the V4 region of the 16s RNA gene is shorter than our read length, we expect to see read-through and our primers in the sequences. As we do not want to include this nonsense information, we decided to analyze our reads with cutadapt prior to denoising.
+
+1. Initial Trimming Attempt (Original and Modified Primers)
+
+The first attempt used the known V4 specific forward and reverse primer sequences ([source](https://earthmicrobiome.ucsd.edu/protocols-and-standards/16s/)). I used the `--p-discard-untrimmed True` flag in order to see how many reads would be trimmed.
+- This step resulted in zero sequences being trimmed or retained.
+- In hindsight, it is irrelevant if the original or modified primers are used, as they are not required to match perfectly and the one base difference does not influence the result.
+- This indicated that the forward and reverse primers were already removed from the sequences by the sequencing facility prior to data delivery. This was also confirmed by our TA. Because I anchored the primers, the `--p-discard-untrimmed True` setting caused all reads to be discarded even if the reverse complement might be present.
+
+2. Identifying and Trimming Read-Through (Successful Strategy)
+
+To be able to identify read-through, even though the forward and reverse primers had already been removed from the sequences, I decided to only look for the reverse complement of the primers.
+- Approximately 4.5 million sequences were successfully trimmed and retained using this approach, which confirms the presence of read-through.
+- The successful trim yielded reads with an approximate length of 250 bases, which likely represents the true length of the amplicon.
+- Many reverse reads were longer than 250 bases, suggesting that the low base quality towards the end prevented cutadapt from recognizing the reverse-complement forward primer due to many mismatches.
+
+#### Denoising with DADA2
+
+Even though we could have used the trimmed reads from the previous step, we decided to simply truncate them aggressively in the denoising step directly.
+A truncation length of 220 basses for the forward reads and 200 bass pairs for the reverse reads resulted in good denoising performance. Around 90% of the reads passed the filtering step and nearly all of those reads were able to be merged.
+
+### Taxonomic classification
+
+To assess the impact of prior knowledge on assignment accuracy, we compare two pre-trained classifiers targeting the 16S rRNA V4 region (515F/806R) from the SILVA 138.2 database (99% NR):
+- Weighted (Stool-Optimized) Classifier: This classifier incorporates weights derived from a large database of human stool samples. This is designed to improve classification accuracy for samples derived from the human gut by prioritizing taxa commonly found in that environment.
+- Unweighted Classifier: This is the standard Naive Bayes classifier, which treats all reference sequences in the database equally.
+
+We can now try to assess differences in classification between the two approaches.
