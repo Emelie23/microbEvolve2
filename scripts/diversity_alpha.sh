@@ -10,7 +10,7 @@ data_dir="$HOME/microbEvolve2/data"
     --i-table $data_dir/raw/dada2_table.qza \
     --p-max-depth 35566 \
     --m-metadata-file $data_dir/raw/metadata_per_sample.tsv \
-    --o-visualization $data_dir/processed/alpha-rarefaction.qzv
+    --o-visualization $data_dir/processed/alpha_rarefaction.qzv
     
     
 #boots plugin recommended
@@ -25,7 +25,7 @@ data_dir="$HOME/microbEvolve2/data"
     --p-replacement \
     --p-alpha-average-method median \
     --p-beta-average-method medoid \
-    --output-dir $data_dir/processed/boots-kmer-diversity
+    --output-dir $data_dir/processed/boots_kmer_diversity
 
 
 #boots plugin recommended
@@ -40,7 +40,7 @@ data_dir="$HOME/microbEvolve2/data"
     --p-replacement \
     --p-alpha-average-method median \
     --p-beta-average-method medoid \
-    --output-dir $data_dir/processed/boots-kmer-diversity_14
+    --output-dir $data_dir/processed/boots_kmer_diversity_14
     
     
     
@@ -56,7 +56,7 @@ data_dir="$HOME/microbEvolve2/data"
     --p-replacement \
     --p-alpha-average-method median \
     --p-beta-average-method medoid \
-    --output-dir $data_dir/processed/boots-kmer-diversity_16
+    --output-dir $data_dir/processed/boots_kmer_diversity_16
 
 
 
@@ -65,7 +65,7 @@ data_dir="$HOME/microbEvolve2/data"
   --i-table $data_dir/raw/dada2_table.qza \
   --i-taxonomy $data_dir/raw/taxonomy_unweighted.qza \
   --p-level 6 \
-  --o-collapsed-table $data_dir/processed/collapsed-table-l6
+  --o-collapsed-table $data_dir/processed/collapsed_table_l6
   
   
   
