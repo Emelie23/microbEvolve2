@@ -17,3 +17,7 @@ qiime diversity beta-group-significance \
     --m-metadata-column \
     --p-pairwise \
     --o-visualization $data_dir/core-metrics-results/bray_curtis-env-significance.qzv
+    
+    
+    
+ 
