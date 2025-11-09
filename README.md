@@ -123,3 +123,21 @@ To assess the impact of prior knowledge on assignment accuracy, we compare two p
 - Unweighted Classifier: This is the standard Naive Bayes classifier, which treats all reference sequences in the database equally.
 
 We can now try to assess differences in classification between the two approaches.
+
+### PCoA and UMAP
+
+PCoA and UMAP are used to visualize the diversity between samples and how it relates to metadata. Both PCoA and UMAP can be used to reduce dimensions, they however follow a different approach: 
+PCoA: 
+- linear method - tries to fit high dimensional data onto a straight axis in lower dimensions. If samples however show non-linear patterns PCoA may flatten or overlap them, potentially hiding local relationships
+- preseves global distance - good for showing overall sample separation but may not distinguish local clusters
+UMAP: 
+- non-linear - can bend and stretch the space to preserve local neighborhoods
+- preservs local clusters and also approximates for global structure (can be tuned with parameters)
+
+Both Bray-Curtis and Jaccard produce a distance matrix to describe dissimilarities inbetween samples. 
+Jaccard:
+- uses presence/absence data only
+- measures how many features are shared between two samples
+Bray-Curtis:
+- uses abundance data
+- measures dissimilarity in terms of presence and abundance of features
