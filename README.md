@@ -123,3 +123,36 @@ To assess the impact of prior knowledge on assignment accuracy, we compare two p
 - Unweighted Classifier: This is the standard Naive Bayes classifier, which treats all reference sequences in the database equally.
 
 We can now try to assess differences in classification between the two approaches.
+
+
+### Rarefaction
+
+We used alpha rarefaction to evaluate how sequencing depth affects within-sample diversity and to select a depth that preserves both diversity estimates and sample retention. Depths of 20 000 and 15 000 reads would have removed many samples without providing meaningful improvements in diversity estimates. The Shannon curves showed a steep rise up to roughly 5 000 reads and then reached a near-plateau between 5 000 and 10 000 reads, which indicates that the overall community structure is already captured in this range. The observed-features curves increased more slowly and did not fully plateau, which is expected for richness metrics, but the additional features gained beyond 9 000 reads were small compared with the large rise at low depths. 
+
+9 000 reads therefore retain almost all samples while still lying in the stability range indicated by the Shannon curves. We therefore set the sampling depth to 9 000 reads as a balanced choice that preserves diversity saturation and maximizes sample retention.
+
+
+### Alpha diversity 
+
+To determine the optimal k-mer size for the analysis, we conducted a comparative study using k-mer sizes 12, 14, and 16. The objective was to identify the parameter that provided the most robust and statistically powerful separation between the 2, 4, and 6-month-old sample groups.
+
+1. Alpha diversity stability assessment
+- The impact of k-mer size on within-sample diversity was assessed first
+- Results for both Shannon Entropy and Pielou's Evenness were found to be highly stable and consistent across all three k-mer sizes
+- This indicates that the alpha diversity findings are robust and not an artifact of this specific parameter choice
+    
+- We then compared the cumulative variance explained by the first two principal coordinates (PC1 + PC2) from the Bray-Curtis PCoA (a quantitative metric).
+    
+2. A descending trend in explanatory power was observed as the k-mer size increased:
+- k-mer 12: 48% variance explained
+- k-mer 14: 47% variance explained
+- k-mer 16: 46% variance explained
+    
+2. Conclusion
+- The k-mer 12 analysis captured the most variance, demonstrating it is the most accurate and powerful representation of the community structure in this dataset
+- Therefore, a k-mer size of 12 was selected as the optimal parameter for all downstream diversity analyses
+
+
+### Beta diversity
+
+The statistical significance of the differences in microbiome composition between age groups was evaluated using a PERMANOVA test on the Bray-Curtis distance matrix. The analysis revealed a non-significant difference between the 2-month and 4-month-old groups (p-value = 0.363), indicating that the gut microbiome remains relatively stable during this initial period of exclusive milk feeding. In contrast, highly significant differences were observed between the 6-month-old group and both the 2-month-old (p-value = 0.001) and 4-month-old (p-value = 0.002) groups. These results strongly suggest a major shift in community structure occurs after 4 months of age, likely driven by the introduction of complementary solid foods (weaning), which establishes a distinct, more mature microbiome profile by 6 months.
