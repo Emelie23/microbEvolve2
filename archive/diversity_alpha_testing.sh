@@ -2,7 +2,6 @@
 
 data_dir="$HOME/microbEvolve2/data"
 
-
 #calculate the interactive alpha-rarefaction curves
 #estimate the optimal sampling depth
 #max depth experiment
@@ -11,7 +10,6 @@ data_dir="$HOME/microbEvolve2/data"
     --p-max-depth 35566 \
     --m-metadata-file $data_dir/raw/metadata_per_sample.tsv \
     --o-visualization $data_dir/processed/alpha_rarefaction.qzv
-    
     
 #boots plugin recommended
 #p-n=number of bootstrap replicates
@@ -27,7 +25,6 @@ data_dir="$HOME/microbEvolve2/data"
     --p-beta-average-method medoid \
     --output-dir $data_dir/processed/boots_kmer_diversity
 
-
 #boots plugin recommended
 #p-n=number of bootstrap replicates
 ! qiime boots kmer-diversity \
@@ -42,8 +39,6 @@ data_dir="$HOME/microbEvolve2/data"
     --p-beta-average-method medoid \
     --output-dir $data_dir/processed/boots_kmer_diversity_14
     
-    
-    
 #boots plugin recommended
 #p-n=number of bootstrap replicates
 ! qiime boots kmer-diversity \
@@ -57,8 +52,6 @@ data_dir="$HOME/microbEvolve2/data"
     --p-alpha-average-method median \
     --p-beta-average-method medoid \
     --output-dir $data_dir/processed/boots_kmer_diversity_16
-
-
 
 #collapse feature table only when neessary, only if I want to group by taxonomy
 ! qiime taxa collapse \
