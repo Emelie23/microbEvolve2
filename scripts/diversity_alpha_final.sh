@@ -36,10 +36,19 @@ log "Starting bootstrapping..."
 
 log "Bootstrapping completed"
 
+log "Generating alpha-significance and alpha-correlation ..."
+
 qiime diversity alpha-group-significance \
-  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity/alpha_diversities/shannon_vector.qza \
-  --m-metadata-file $data_dir/metadata.tsv \
-  --o-visualization $data_dir/processed/shannon-group-significance.qzv
-  
+  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity/alpha_diversities/shannon.qza \
+  --m-metadata-file $data_dir/raw/metadata.tsv \
+  --o-visualization $data_dir/processed/shannon_significance.qzv
+
+qiime diversity alpha-correlation \
+  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity/alpha_diversities/shannon.qza \
+  --m-metadata-file $data_dir/raw/metadata.tsv \
+  --o-visualization $data_dir/processed/shannon_correlation.qzv
+
+log "Generating alpha-significance and alpha-correlation ..."
+ 
 log "Diversity script completed successfully!"
 
