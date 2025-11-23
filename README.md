@@ -134,28 +134,27 @@ We used alpha rarefaction to evaluate how sequencing depth affects within-sample
 
 ### Alpha diversity 
 
-To determine the optimal k-mer size for the analysis, we conducted a comparative study using k-mer sizes 12, 14, and 16. The objective was to identify the parameter that provided the most robust and statistically powerful separation between the 2, 4, and 6-month-old sample groups.
+We compared k-mer sizes 12, 14, and 16 to identify the parameter that best preserves within-sample diversity patterns across the 2-, 4-, and 6-month groups.
 
-1. Alpha diversity stability assessment
-- The impact of k-mer size on within-sample diversity was assessed first
-- Results for both Shannon Entropy and Pielou's Evenness were found to be highly stable and consistent across all three k-mer sizes
-- This indicates that the alpha diversity findings are robust and not an artifact of this specific parameter choice
-    
-- We then compared the cumulative variance explained by the first two principal coordinates (PC1 + PC2) from the Bray-Curtis PCoA (a quantitative metric).
-    
-2. A descending trend in explanatory power was observed as the k-mer size increased:
-- k-mer 12: 48% variance explained
-- k-mer 14: 47% variance explained
-- k-mer 16: 46% variance explained
-    
-2. Conclusion
-- The k-mer 12 analysis captured the most variance, demonstrating it is the most accurate and powerful representation of the community structure in this dataset
-- Therefore, a k-mer size of 12 was selected as the optimal parameter for all downstream diversity analyses
+We first tested how k-mer size affects within-sample diversity: Shannon entropy and Pielou’s evenness remained nearly identical across all three k-mer sizes.
+This stability shows that alpha-diversity estimates do not depend on the k-mer choice and that the observed patterns are not artifacts of the parameter.
+Because k-mer 12 reproduced the same diversity structure as k-mer 14 and 16 but with fewer computational demands, it offered the most efficient representation.
+We also checked how the first two PCoA axes from Bray–Curtis behaved: The cumulative variance explained declined slightly with increasing k-mer size (48% → 47% → 46%).
+This trend supported the broader impression that larger k-mers did not capture additional structure.
 
+Conclusion
+We selected k-mer 12 because it produced stable Shannon and Pielou estimates that matched those from larger k-mers while avoiding unnecessary parameter inflation. The alpha-diversity consistency across 12, 14, and 16 provided the strongest evidence that k-mer 12 is the appropriate and efficient choice for downstream analyses.
+
+### Alpha significance 
+
+We then tested whether Shannon diversity differs across timepoints. The Kruskal–Wallis test gave a p-value of 0.0599, which sits just above the significance threshold and weakens any claim of a global shift. Pairwise tests showed a significant difference only between the 2- and 4-month groups. This suggests a modest change in richness or evenness during this interval, but the effect does not extend to the 6-month samples. The 2- vs 6-month and 4- vs 6-month comparisons showed high p-values and strong overlap in the boxplots, which indicates that the pattern is isolated and not part of a consistent temporal trend.
 
 ### Beta diversity
+We evaluated the temporal development of the gut microbiome using two statistical approaches. A preliminary, cross-sectional PERMANOVA on the complete (unfiltered) dataset suggested that the microbiome was stable during the exclusive milk-feeding period, showing no significant difference between the 2-month and 4-month-old groups (p = 0.363). This initial analysis only detected the major shift occurring after 4 months, with highly significant differences between the 6-month-old group and both the 2-month-old (p = 0.001) and 4-month-old (p = 0.002) groups.
 
-The statistical significance of the differences in microbiome composition between age groups was evaluated using a PERMANOVA test on the Bray-Curtis distance matrix. The analysis revealed a non-significant difference between the 2-month and 4-month-old groups (p-value = 0.363), indicating that the gut microbiome remains relatively stable during this initial period of exclusive milk feeding. In contrast, highly significant differences were observed between the 6-month-old group and both the 2-month-old (p-value = 0.001) and 4-month-old (p-value = 0.002) groups. These results strongly suggest a major shift in community structure occurs after 4 months of age, likely driven by the introduction of complementary solid foods (weaning), which establishes a distinct, more mature microbiome profile by 6 months.
+However, this cross-sectional method is confounded by high inter-individual variability. To account for this, we performed a more sensitive longitudinal (repeated-measures) analysis, focusing only on infants with complete samples for all three time points. This analysis revealed a pattern of continuous maturation. In this paired cohort, significant shifts were evident between all groups: 2 vs. 4 months (p = 0.039), 2 vs. 6 months (p = 0.029), and 4 vs. 6 months (p = 0.031).
+These results clarify that the substantial "noise" from differences between infants in the full dataset had masked the subtle but significant developmental trajectory occurring within infants between 2 and 4 months. Therefore, the microbiome is not static but undergoes continuous, significant evolution throughout the first six months of life, even prior to the introduction of solid foods.
+
 
 ### PCoA and UMAP
 
