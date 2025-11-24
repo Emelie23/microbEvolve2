@@ -139,15 +139,29 @@ We compared k-mer sizes 12, 14, and 16 to identify the parameter that best prese
 We first tested how k-mer size affects within-sample diversity: Shannon entropy and Pielou’s evenness remained nearly identical across all three k-mer sizes.
 This stability shows that alpha-diversity estimates do not depend on the k-mer choice and that the observed patterns are not artifacts of the parameter.
 Because k-mer 12 reproduced the same diversity structure as k-mer 14 and 16 but with fewer computational demands, it offered the most efficient representation.
-We also checked how the first two PCoA axes from Bray–Curtis behaved: The cumulative variance explained declined slightly with increasing k-mer size (48% → 47% → 46%).
+We also checked how the first two PCoA axes from Bray–Curtis behaved: The cumulative variance explained declined slightly with increasing k-mer size (48% -> 47%->46%).
 This trend supported the broader impression that larger k-mers did not capture additional structure.
 
 Conclusion
 We selected k-mer 12 because it produced stable Shannon and Pielou estimates that matched those from larger k-mers while avoiding unnecessary parameter inflation. The alpha-diversity consistency across 12, 14, and 16 provided the strongest evidence that k-mer 12 is the appropriate and efficient choice for downstream analyses.
 
+
 ### Alpha significance 
 
-We then tested whether Shannon diversity differs across timepoints. The Kruskal–Wallis test gave a p-value of 0.0599, which sits just above the significance threshold and weakens any claim of a global shift. Pairwise tests showed a significant difference only between the 2- and 4-month groups. This suggests a modest change in richness or evenness during this interval, but the effect does not extend to the 6-month samples. The 2- vs 6-month and 4- vs 6-month comparisons showed high p-values and strong overlap in the boxplots, which indicates that the pattern is isolated and not part of a consistent temporal trend.
+Our analysis revealed distinct developmental phases depending on the diversity metric applied. The Shannon index, which accounts for both richness and evenness, showed a trend toward significance (p=0.059) driven primarily by changes between 2 and 4 months. However, this early shift was not sustained at 6 months, suggesting high inter-individual variability at the later timepoint. 
+Conversely, Pielou’s Evenness showed early stability followed by later disruption. Evenness remained constant between 2 and 4 months (p=0.42) but shifted significantly between 4 and 6 months (p=0.01). 
+
+This discrepancy implies that early microbiome development (2–4 months) is characterized by changes in species richness within a stable hierarchy, whereas the transition to 6 months involves a structural reorganization of microbial dominance.
+
+
+### Spearman correlation
+
+Spearman correlation analysis revealed significant associations between alpha diversity and metadata. Interestingly, while behavioral development was negatively correlated with Shannon diversity (R=-0.27, p=0.007), markers of sleep health showed the opposite trend. Both sleep rhythmicity (R=0.25, p=0.03) and sleep quality (R=0.20, p=0.049) were positively associated with Shannon diversity, suggesting a link between microbiome richness and circadian regulation. Furthermore, we observed a significant psychosocial connection: higher 'Parent Attuned Caring' scores correlated with increased Pielou’s Evenness (R=0.27, p=0.008), suggesting that a responsive caregiving environment may support a more ecologically balanced gut community in infants. However, the correlation strength is weak-to-moderate, suggesting that parenting style is only a contributing factor.
+
+-->Behavioral development associates with less diverse, more concentrated microbial communities
+-->Sleep health associates with more diverse communities
+-->Attuned caregiving associates with more even communities
+
 
 ### Beta diversity
 We evaluated the temporal development of the gut microbiome using two statistical approaches. A preliminary, cross-sectional PERMANOVA on the complete (unfiltered) dataset suggested that the microbiome was stable during the exclusive milk-feeding period, showing no significant difference between the 2-month and 4-month-old groups (p = 0.363). This initial analysis only detected the major shift occurring after 4 months, with highly significant differences between the 6-month-old group and both the 2-month-old (p = 0.001) and 4-month-old (p = 0.002) groups.

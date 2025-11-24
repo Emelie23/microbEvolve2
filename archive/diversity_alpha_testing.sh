@@ -61,5 +61,28 @@ data_dir="$HOME/microbEvolve2/data"
   --o-collapsed-table $data_dir/processed/collapsed_table_l6
   
   
+#merge shannon data from 12,14,16 kmer size together
+qiime tools export \
+  --input-path $data_dir/raw/boots_kmer_diversity/alpha_diversities/shannon.qza \
+  --output-path shannon_12
+
+qiime tools export \
+  --input-path $data_dir/raw/boots_kmer_diversity_14/alpha_diversities/shannon.qza \
+  --output-path shannon_14
+
+qiime tools export \
+  --input-path $data_dir/raw/boots_kmer_diversity_16/alpha_diversities/shannon.qza \
+  --output-path shannon_16
   
-  
+  #merge pielous evenness index from 12,14,16 kmer size together
+qiime tools export \
+  --input-path $data_dir/raw/boots_kmer_diversity/alpha_diversities/pielou.qza \
+  --output-path pielou_12
+
+qiime tools export \
+  --input-path $data_dir/raw/boots_kmer_diversity_14/alpha_diversities/pielou.qza \
+  --output-path pielou_14
+
+qiime tools export \
+  --input-path $data_dir/raw/boots_kmer_diversity_16/alpha_diversities/pielou.qza \
+  --output-path pielou_16
