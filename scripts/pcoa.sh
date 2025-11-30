@@ -23,11 +23,11 @@ log "Input directory verified: "$input_dir""
 
 log "Starting PCoA computation for bray-curtis and jaccard"
 
- qiime diversity pcoa \
+qiime diversity pcoa \
   --i-distance-matrix "$input_dir/braycurtis.qza" \
   --o-pcoa "$data_dir/raw/pcoa_braycurtis.qza"
 
- qiime diversity pcoa \
+qiime diversity pcoa \
   --i-distance-matrix "$input_dir/jaccard.qza" \
   --o-pcoa "$data_dir/raw/pcoa_jaccard.qza"
 
