@@ -4,6 +4,7 @@ print("Filtering metadata for ...")
 
 data_dir = "data/raw"
 
+metadata = pd.read_csv(f"{data_dir}/metadata.tsv", sep="\t")
 
 metadata_filtered = metadata.groupby("infant_id")["timepoint"].nunique().eq(3)
 metadata_filtered_index = metadata_filtered[metadata_filtered].index
