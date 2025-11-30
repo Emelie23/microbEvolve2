@@ -59,7 +59,3 @@ data_dir="$HOME/microbEvolve2/data"
   --i-taxonomy $data_dir/raw/taxonomy_unweighted.qza \
   --p-level 6 \
   --o-collapsed-table $data_dir/processed/collapsed_table_l6
-  
-  
-  
-  
