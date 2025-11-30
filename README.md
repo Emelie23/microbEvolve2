@@ -27,7 +27,7 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
         --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.7/amplicon/released/qiime2-amplicon-macos-latest-conda.yml
     conda activate microbEvolve
     conda config --env --set subdir osx-64
-    conda install openpyxl
+    conda install openpyxl plotly
     ```
 
     For Linux:
