@@ -19,6 +19,10 @@ metadata = (
     .set_index("sampleid")
 )
 
+metadata["timepoint"] = metadata["timepoint"].replace(
+    {"2 months": 2, "4 months": 4, "6 months": 6}
+)
+
 metadata.to_csv(f"{data_dir}/raw/metadata.tsv", sep="\t", header=True, index=True)
 
 print(f"Metadata file written to {data_dir}/raw/metadata.tsv")
