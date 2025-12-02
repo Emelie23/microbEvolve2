@@ -9,7 +9,7 @@ log() {
 
 log "Starting diversity script"
 
-data_dir="$HOME/microbEvolve2/data"
+data_dir="data"
 
 log "Starting rarefaction..."
 
@@ -32,6 +32,18 @@ log "Starting bootstrapping..."
     --p-replacement \
     --p-alpha-average-method median \
     --p-beta-average-method medoid \
+    --output-dir $data_dir/raw/boots_kmer_diversity_collapsed
+
+! qiime boots kmer-diversity \
+    --i-table $data_dir/raw/dada2_table.qza \
+    --i-sequences $data_dir/raw/dada2_rep_set.qza \
+    --m-metadata-file $data_dir/raw/metadata.tsv \
+    --p-sampling-depth 9000 \
+    --p-n 10 \
+    --p-kmer-size 12 \
+    --p-replacement \
+    --p-alpha-average-method median \
+    --p-beta-average-method medoid \
     --output-dir $data_dir/raw/boots_kmer_diversity
 
 log "Bootstrapping completed"
@@ -39,13 +51,13 @@ log "Bootstrapping completed"
 log "Generating alpha-significance and alpha-correlation ..."
 
 qiime diversity alpha-group-significance \
-  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity/alpha_diversities/shannon.qza \
-  --m-metadata-file $data_dir/raw/metadata_collapsed.tsv \
+  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity_collapsed/alpha_diversities/shannon.qza \
+  --m-metadata-file $data_dir/raw/metadata_collapsed_withtypes.tsv \
   --o-visualization $data_dir/processed/shannon_significance.qzv
 
 qiime diversity alpha-correlation \
-  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity/alpha_diversities/shannon.qza \
-  --m-metadata-file $data_dir/raw/metadata_collapsed.tsv \
+  --i-alpha-diversity $data_dir/raw/boots_kmer_diversity_collapsed/alpha_diversities/shannon.qza \
+  --m-metadata-file $data_dir/raw/metadata_collapsed_withtypes.tsv \
   --o-visualization $data_dir/processed/shannon_correlation.qzv
 
 log "Generating alpha-significance and alpha-correlation ..."
