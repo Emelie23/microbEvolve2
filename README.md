@@ -24,7 +24,7 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
     ```bash
     conda env create \
         --name microbEvolve \
-        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.7/amplicon/released/qiime2-amplicon-macos-latest-conda.yml
+        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.10/amplicon/released/qiime2-amplicon-macos-latest-conda.yml
     conda activate microbEvolve
     conda config --env --set subdir osx-64
     conda install openpyxl plotly
@@ -35,7 +35,7 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
     ```bash
     conda env create \
         --name microbEvolve \
-        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.7/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml
+        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.10/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml
     conda activate microbEvolve
     conda install openpyxl
     ```
