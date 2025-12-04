@@ -24,10 +24,11 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
     ```bash
     conda env create \
         --name microbEvolve \
-        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.10/amplicon/released/qiime2-amplicon-macos-latest-conda.yml
+        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.10/amplicon/released/qiime2-amplicon-macos-latest-conda.yml \
+        --solver=libmamba
     conda activate microbEvolve
     conda config --env --set subdir osx-64
-    conda install openpyxl plotly
+    conda install openpyxl plotly bioconda::gseapy --solver=libmamba
     ```
 
     For Linux:
@@ -35,9 +36,10 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
     ```bash
     conda env create \
         --name microbEvolve \
-        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.10/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml
+        --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.10/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml \
+        --solver=libmamba
     conda activate microbEvolve
-    conda install openpyxl
+    conda install openpyxl bioconda::gseapy --solver=libmamba
     ```
 
     In case openpyxl installation fails, try installing with pip (`pip install openpyxl`).
