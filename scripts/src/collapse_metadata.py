@@ -4,9 +4,9 @@ print(
     "Start script to collapse metadata (and intermediate metadata file that is needed to collapse feature table)..."
 )
 
-data_dir = "data/raw"
+data_dir = "../data"
 
-metadata = pd.read_csv(f"{data_dir}/metadata.tsv", sep="\t")
+metadata = pd.read_csv(f"{data_dir}/raw/metadata.tsv", sep="\t")
 
 # delete current sampleid column
 metadata = metadata.drop(columns=["sampleid"])
@@ -27,7 +27,7 @@ metadata = metadata.rename(columns={"infant_time": "sampleid"})
 
 # collapse metadata to have one representative sample per infant per timepoint
 metadata_collapsed = metadata.groupby("sampleid", as_index=False).first()
-metadata_collapsed.to_csv(f"{data_dir}/metadata_collapsed.tsv", sep="\t", index=False)
+metadata_collapsed.to_csv(f"{data_dir}/raw/metadata_collapsed.tsv", sep="\t", index=False)
 
 
 type_information = pd.DataFrame(
@@ -54,7 +54,7 @@ type_information = pd.DataFrame(
 )
 metadata_collapsed_withtypes = pd.concat([type_information, metadata_collapsed])
 metadata_collapsed_withtypes.to_csv(
-    f"{data_dir}/metadata_collapsed_withtypes.tsv", sep="\t", index=False
+    f"{data_dir}/raw/metadata_collapsed_withtypes.tsv", sep="\t", index=False
 )
 
 print("Collapsed metadata file created successfully...")

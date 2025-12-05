@@ -2,7 +2,7 @@ import pandas as pd
 
 print("Merging metadata...")
 
-data_dir = "data"
+data_dir = "../data"
 
 metadata_per_sample = pd.read_csv(
     f"{data_dir}/raw/metadata_per_sample.tsv", sep="\t", index_col="sampleid"
