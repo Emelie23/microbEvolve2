@@ -9,8 +9,8 @@ log() {
 
 log "Starting Differential Abundance script"
 
-data_dir_raw="$HOME/microbEvolve2/data/raw"
-data_dir_processed="$HOME/microbEvolve2/data/processed"
+data_dir_raw="../data/raw"
+data_dir_processed="../data/processed"
 
 log "Filter feature table for minimal frequency and abundance in samples"
 
@@ -34,7 +34,7 @@ qiime taxa collapse \
 
 log "Taxa collapsed and merged to feature table"
 
-log "Starting ANACOM-BC"
+log "Starting ANCOM-BC"
 
 # Run ANCOM-BC
 qiime composition ancombc2 \
@@ -46,6 +46,12 @@ qiime composition ancombc2 \
     --p-p-adjust-method "BH" \
     --o-ancombc2-output $data_dir_raw/ancombc_timepoint_differentials.qza
 
+mkdir -p $data_dir_raw/ancombc_timepoint_differentials
+
+qiime tools export \
+    --input-path $data_dir_raw/ancombc_timepoint_differentials.qza \
+    --output-path $data_dir_raw/ancombc_timepoint_differentials
+
 # Generate a barplot of differentially abundant ASVs between timpoints
 qiime composition ancombc2-visualizer \
     --i-data $data_dir_raw/ancombc_timepoint_differentials.qza \
@@ -56,6 +62,6 @@ qiime composition tabulate \
     --i-data $data_dir_raw/ancombc_timepoint_differentials.qza \
     --o-visualization $data_dir_processed/ancombc_timepoint_results.qzv
 
-log "ANACOM-BC completed successfully"
+log "ANCOM-BC completed successfully"
 
 log "Differential Abundance script completed successfully!"
