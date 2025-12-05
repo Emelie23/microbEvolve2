@@ -189,3 +189,6 @@ Jaccard:
 Bray-Curtis:
 - uses abundance data
 - measures dissimilarity in terms of presence and abundance of features
+
+## Differential Abundance
+We used Acomb2 to perform differential abundance, as it allows to control for batch effects. We decided to use feature table and metadat which contains one representative sample per infant per timepoint.
