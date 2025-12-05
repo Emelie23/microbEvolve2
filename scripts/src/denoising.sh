@@ -1,6 +1,6 @@
 #!/bin/bash
 
-data_dir="$HOME/microbEvolve2/data"
+data_dir="../data"
 
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs $data_dir/raw/demux_paired_end.qza \

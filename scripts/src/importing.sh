@@ -7,7 +7,7 @@
 #Install openpyxl into microbEvolve environment
 
 #Create data directory variable
-data_dir="$HOME/microbEvolve2/data"
+data_dir="../data"
 
 #Create directories
 mkdir -p "$data_dir/raw"
