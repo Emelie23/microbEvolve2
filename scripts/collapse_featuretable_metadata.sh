@@ -9,7 +9,7 @@ log() {
 
 log "Starting script to collapse feature table and metadata..."
 
-data_dir="$HOME/microbEvolve2/data/raw"
+data_dir="data/raw"
 
 #create intermediate metadata file
 log "Run script to create intermedia metadata file (that is needed to collapse feature table)"
