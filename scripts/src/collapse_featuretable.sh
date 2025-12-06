@@ -9,7 +9,7 @@ log() {
 
 log "Starting script to collapse feature table..."
 
-data_dir="data/raw"
+data_dir="../data/raw"
 scripts_dir="src"
 
 log "Collapse feature table to have on representative sample per infant per timepoint..."

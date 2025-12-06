@@ -9,8 +9,8 @@ log() {
 
 log "Starting Differential Abundance script"
 
-data_dir_raw="$HOME/microbEvolve2/data/raw"
-data_dir_processed="$HOME/microbEvolve2/data/processed"
+data_dir_raw="../data/raw"
+data_dir_processed="../data/processed"
 
 log "Filter feature table for minimal frequency and abundance in samples"
 
