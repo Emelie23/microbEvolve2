@@ -14,7 +14,7 @@ start_time=$(date +%s)
 source $HOME/.bashrc
 conda activate microbEvolve
 
-bash $HOME/microbEvolve2/scripts/differential_abundance.sh
+bash $HOME/microbEvolve2/scripts/src/differential_abundance.sh
 
 # Calculate duration
 end_time=$(date +%s)

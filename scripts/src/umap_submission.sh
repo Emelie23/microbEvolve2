@@ -14,7 +14,7 @@ start_time=$(date +%s)
 source $HOME/.bashrc
 conda activate microbEvolve
 
-bash $HOME/microbEvolve2/scripts/umap.sh
+bash $HOME/microbEvolve2/scripts/src/umap.sh
 
 # Calculate duration
 end_time=$(date +%s)
