@@ -13,4 +13,4 @@ start_time=$(date +%s)
 source $HOME/.bashrc
 conda activate microbEvolve
 
-sh $HOME/microbEvolve2/scripts/quality_control.sh
+sh $HOME/microbEvolve2/scripts/src/quality_control.sh

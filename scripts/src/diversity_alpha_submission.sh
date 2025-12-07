@@ -17,7 +17,7 @@ start_time=$(date +%s)
 source $HOME/.bashrc
 conda activate boots
 
-bash $HOME/microbEvolve2/scripts/diversity_alpha.sh
+bash $HOME/microbEvolve2/scripts/src/diversity_alpha.sh
 
 # Calculate duration
 end_time=$(date +%s)

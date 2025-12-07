@@ -1,6 +1,6 @@
 #!/bin/bash
 
-data_dir="data"
+data_dir="../data"
 
     
 #PERMANOVA test checking whether the observed categories are significantly grouped

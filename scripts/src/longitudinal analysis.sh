@@ -9,7 +9,7 @@ log() {
 
 log "Starting longitudinal script"
 
-data_dir="$HOME/microbEvolve2/data"
+data_dir="../data"
 
 
 qiime longitudinal volatility \

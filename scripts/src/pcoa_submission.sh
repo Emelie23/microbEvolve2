@@ -14,7 +14,7 @@ start_time=$(date +%s)
 source $HOME/.bashrc
 conda activate microbEvolve
 
-bash $HOME/microbEvolve2/scripts/pcoa.sh
+bash $HOME/microbEvolve2/scripts/src/pcoa.sh
 
 # Calculate duration
 end_time=$(date +%s)

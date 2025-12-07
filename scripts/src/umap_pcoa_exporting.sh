@@ -9,7 +9,7 @@ log() {
 
 log "Starting UMAP and PCoA exporting script"
 
-data_dir="$HOME/microbEvolve2/data/raw"
+data_dir="../data/raw"
 
 qiime tools export \
   --input-path "$data_dir/umap_braycurtis.qza" \

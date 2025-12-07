@@ -9,8 +9,8 @@ log() {
 
 log "Starting UMAP script"
 
-input_dir="$HOME/microbEvolve2/data/raw/boots_kmer_diversity/distance_matrices"
-data_dir="$HOME/microbEvolve2/data"
+input_dir="../data/raw/boots_kmer_diversity/distance_matrices"
+data_dir="../data"
 
 # Check if required input directory exists
 if [[ ! -d "$input_dir" ]]; then

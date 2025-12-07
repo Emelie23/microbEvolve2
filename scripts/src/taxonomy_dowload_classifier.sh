@@ -4,7 +4,7 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-data_dir="$HOME/microbEvolve2/data"
+data_dir="../data"
 mkdir -p "$data_dir/raw"
 
 log "Downloading unweighted classifier from SILVA database..."

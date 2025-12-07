@@ -9,7 +9,7 @@ log() {
 
 log "Starting taxonomy classification script"
 
-data_dir="$HOME/microbEvolve2/data"
+data_dir="../data"
 
 # Check if required input file exists
 if [[ ! -f "$data_dir/raw/dada2_rep_set.qza" ]]; then

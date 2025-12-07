@@ -9,7 +9,7 @@ log() {
 
 log "Starting diversity script"
 
-data_dir="data"
+data_dir="../data"
 
 log "Starting rarefaction..."
 

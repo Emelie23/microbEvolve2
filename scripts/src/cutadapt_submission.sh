@@ -13,7 +13,7 @@ start_time=$(date +%s)
 source $HOME/.bashrc
 conda activate microbEvolve
 
-sh $HOME/microbEvolve2/scripts/cutadapt.sh
+sh $HOME/microbEvolve2/scripts/src/cutadapt.sh
 
 # Calculate duration
 end_time=$(date +%s)
