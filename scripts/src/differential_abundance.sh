@@ -12,6 +12,13 @@ log "Starting Differential Abundance script"
 data_dir_raw="../data/raw"
 data_dir_processed="../data/processed"
 
+# Detect CPU count: prefer SLURM, fallback to system
+if [[ -n "${SLURM_CPUS_PER_TASK:-}" ]]; then
+    num_cpus="${SLURM_CPUS_PER_TASK}"
+else
+    num_cpus=1
+fi
+
 log "Filter feature table for minimal frequency and abundance in samples"
 
 # only retain features with minimal frequency of 1 that are present in min 1 samples
@@ -44,6 +51,7 @@ qiime composition ancombc2 \
     --p-random-effects-formula "(1| infant_id)"\
     --p-reference-levels "timepoint::2 months" \
     --p-p-adjust-method "BH" \
+    --p-num-processes "$num_cpus" \
     --o-ancombc2-output $data_dir_raw/ancombc_timepoint_differentials.qza
 
 mkdir -p $data_dir_raw/ancombc_timepoint_differentials
