@@ -47,6 +47,19 @@ metadata_withtypes = pd.concat([type_information, metadata])
 metadata_withtypes.to_csv(
     f"{data_dir}/raw/metadata_withtypes.tsv", sep="\t", header=True, index=False
 )
+
+metadata_numeric_timepoints = metadata.copy()
+metadata_numeric_timepoints["timepoint"] = metadata_numeric_timepoints[
+    "timepoint"
+].replace({"2 months": 2, "4 months": 4, "6 months": 6})
+
+metadata_numeric_timepoints.to_csv(
+    f"{data_dir}/raw/metadata_numeric_timepoints.tsv",
+    sep="\t",
+    header=True,
+    index=False,
+)
+
 print(
     f"Metadata file with type information written to {data_dir}/raw/metadata_withtypes.tsv"
 )
