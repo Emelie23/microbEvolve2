@@ -1,21 +1,19 @@
 #!/bin/bash
 
 #Activate conda environment microbEvolve
-#Install openpyxl into microbEvolve environment
 
 set -e
 
-# Add logging function
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
 log "Starting importing script"
 
-#Create data directory variable
+#Create variable data_dir
 data_dir="../data"
 
-#Create directories
+#Create directories data/raw and data/processed
 mkdir -p "$data_dir/raw"
 mkdir -p "$data_dir/processed"
 
@@ -51,6 +49,6 @@ df.to_csv("$data_dir/raw/metadata_per_age.tsv", sep="\t", index=False)
 
 EOF
 
-log "metadata_dictionary metadata_per_age and metadata_per_sample stored successfuly as single .tsv files in $data_dir/raw/"
+log "metadata_dictionary, metadata_per_age and metadata_per_sample stored successfuly as single .tsv files in $data_dir/raw/"
 
 log "Import script completed successfully!"
