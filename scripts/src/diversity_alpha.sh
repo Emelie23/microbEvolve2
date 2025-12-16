@@ -84,12 +84,12 @@ qiime diversity alpha-correlation \
 # Generating significance and correlation for shannon diversity from collapsed table
 qiime diversity alpha-group-significance \
   --i-alpha-diversity $data_dir/raw/boots_core_metrics_collapsed/alpha_diversities/shannon.qza \
-  --m-metadata-file $data_dir/raw/metadata_withtypes.tsv \
+  --m-metadata-file $data_dir/raw/metadata_collapsed_withtypes.tsv \
   --o-visualization $data_dir/processed/shannon_core_significance_collapsed.qzv
 
 qiime diversity alpha-correlation \
   --i-alpha-diversity $data_dir/raw/boots_core_metrics_collapsed/alpha_diversities/shannon.qza \
-  --m-metadata-file $data_dir/raw/metadata_withtypes.tsv \
+  --m-metadata-file $data_dir/raw/metadata_collapsed_withtypes.tsv \
   --o-visualization $data_dir/processed/shannon_core_correlation_collapsed.qzv
 
 # Once again for core metrics from uncollapsed data
