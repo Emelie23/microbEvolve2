@@ -52,6 +52,21 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
 
 ## Project Structure
 
+The analysis of this project is organized into five sections: 
+- 01 Preprocessing
+- 02 Diversity
+- 03 Inter-Infant differences and temporal trajectories
+- 04 Compositional changes over time
+- 05 Changes and prediction of behavioural outcome measures
+
+The Jupiter notebooks are located in the `scripts`directory.
+
+All notebooks follow the same structure. Each step contains a short explanation, followed by the corresponding code. For computationally light steps, the code is written directly in the notebook cell. For more demanding steps, the cell calls an external script. These external scripts are located in the directory `scripts/src`. Most of them were run on Euler, and many include the matching submission file in case you want to run the job on the cluster.
+
+Additional exploratory or parameter-testing scripts are stored in the `archive` directory. They are not directly included in the notebooks, but the documentation of each step notes when archived code contributed to the final version.
+
+Please submit jobs on Euler from the `scripts` directory to ensure that all relative paths resolve correctly.
+
 ```
 microbEvolve2/
 ├── README.md                  # This file
