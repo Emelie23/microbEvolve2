@@ -21,11 +21,11 @@ fi
 
 log "Filter feature table for minimal frequency and abundance in samples"
 
-# only retain features with minimal frequency of 1 that are present in min 1 samples
+# only retain features with that are present in at least 3 samples
+# Frequency based filtering will be performed in ANCOM-BC directly
 qiime feature-table filter-features \
     --i-table $data_dir_raw/table_collapsed.qza \
-    --p-min-frequency 1 \
-    --p-min-samples 1 \
+    --p-min-samples 3 \
     --o-filtered-table $data_dir_raw/table_collapsed_abund.qza
 
 log "Feature table filtered successfully"
@@ -44,6 +44,8 @@ log "Taxa collapsed and merged to feature table"
 log "Starting ANCOM-BC"
 
 # Run ANCOM-BC
+# We choose a prevalence cutoff of 0.05 to include even rare taxa
+# We also choose BH as the p-value adjustment method to control FDR 
 qiime composition ancombc2 \
     --i-table $data_dir_raw/table_collapsed_abund_l6.qza \
     --m-metadata-file $data_dir_raw/metadata_collapsed.tsv \
@@ -51,6 +53,7 @@ qiime composition ancombc2 \
     --p-random-effects-formula "(1| infant_id)"\
     --p-reference-levels "timepoint::2 months" \
     --p-p-adjust-method "BH" \
+    --p-prevalence-cutoff 0.05 \
     --p-num-processes "$num_cpus" \
     --o-ancombc2-output $data_dir_raw/ancombc_timepoint_differentials.qza
 
