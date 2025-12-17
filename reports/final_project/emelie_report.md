@@ -13,14 +13,14 @@ Hickman, B., Salonen, A., Ponsero, A. J., Jokela, R., Kolho, K. L., de Vos, W. M
 
 
 Methods (500-1000 words) 
-To evaluate whether sequencing depth limited diversity estimates, we first generated alpha rarefaction curves. Based on these curves, we quantified alpha diversity using an alignment-free k-mer approach, calculating Shannon entropy and Pielou’s evenness without phylogenetic reconstruction. Because this approach ignores phylogenetic structure, we validated the results using phylogeny-based core diversity metrics.
+To evaluate whether sequencing depth limited diversity estimates, we first generated alpha rarefaction curves. Based on these curves, we quantified alpha diversity using an alignment-free k-mer approach, calculating Shannon entropy and Pielou’s evenness without phylogenetic reconstruction. To compare methods, we also computed the same diversity metrics from ASV-based feature tables.
 For downstream analyses, we fixed a subsampling depth of 9,000 reads and a k-mer size of 12. We justified this choice by comparing diversity estimates across k-mer sizes of 12, 14, and 16. To reduce stochastic effects from rarefaction, we applied bootstrapping and averaged diversity metrics across repeated resamples at the chosen depth.
 Finally, we tested differences between timepoints using non-parametric Kruskal–Wallis tests on collapsed metadata.
 (118 words) 
 
 Results (1500 words)
 Methodological validation supported the selected parameters. Rarefaction analysis showed that Shannon entropy plateaued between 5,000 and 10,000 reads. This plateau indicates that a depth of 9,000 reads captured community diversity while retaining most samples. Consistent with this, diversity estimates were robust to k-mer size. Metrics at k = 12 matched those at higher resolutions (k = 14, 16), despite increased computational cost.
-Biologically, alignment-free analyses showed no significant differences in alpha diversity across the 2-, 4-, and 6-month timepoints, with richness and evenness remaining stable. In contrast, phylogeny-based core metrics detected a significant pairwise difference between months 2 and 4 (p = 0.048). This result suggests subtle phylogenetic shifts that are not resolved by k-mer–based methods.
+Biologically, alignment-free analyses showed no significant differences in alpha diversity across the 2-, 4-, and 6-month timepoints, with richness and evenness remaining stable. In contrast, ASV-based diversity metrics detected a significant pairwise difference between months 2 and 4 (p = 0.048). This result suggests subtle phylogenetic shifts that are not resolved by k-mer–based methods.
 (117)
 
 Discussion (250-500 words) 
