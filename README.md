@@ -68,21 +68,28 @@ Additional exploratory or parameter-testing scripts are stored in the `archive` 
 Please submit jobs on Euler from the `scripts` directory to ensure that all relative paths resolve correctly.
 
 ```
-microbEvolve2/
-├── README.md                  # This file
-├── project_plan.md            # (Detailed) project planning
-├── data/                      # Data files
-│   ├── raw/                   # Raw QIIME2 artifacts (.qza files)
-│   └── processed/             # Processed visualizations (.qzv files)
-├── scripts/                   # Analysis scripts
-│   ├── importing.sh           # Data import scripts
-│   ├── quality_control.sh     # Quality control analysis
-│   ├── cutadapt.sh            # Primer trimming
-│   ├── denoising.sh           # DADA2 denoising
-│   └── taxonomy.sh            # Taxonomic classification
-├── reports/                   # Reports
-└── archive/                   # Archived scripts and old versions
-```
+microbevolve2/
+├── README.md                                          # This file
+├── data/                                              # Data files
+│   ├── raw/                                           # Raw QIIME2 artifacts (.qza files) and metadata (.tsv files)
+│   └── processed/                                     # Processed visualizations (.qzv files)
+├── scripts/                                           # JupiterNotebooks and analysis shell scripts
+│   ├── 01-1_preprocessing                             # Preprocessing Notebook
+│   ├── 01-2_featuretable_metadata_preparation.ipynb   # Featuretable and Metadata preparation Notebook
+│   ├── 02_diversity.ipynb                             # Diversity Notebook
+│   ├── 03_diversity_significance.ipynb                # Statistical Testing Diversity Notebook
+│   ├── 04-1_differential_abundance.ipynb              # Differential Abundance Notebook
+│   ├── 04-2_functional_annotoation.ipynb              # Functional Annotation Notebook
+│   ├── 05-1_correlations.ipynb                        # Outcome measure correlation Notebook
+│   ├── 05-2_prediction.ipynb                          # Outcome measure prediction Notebook
+│   ├── src/                                           # Shell Scripts containing the code
+│   ├── figures/                                       # Tracked Figures used in Notebooks (workflow images)
+│   └── ritme/                                         # XXX
+├── report/                                            # Reports
+│   ├── midterm/                                       # Midterm report
+│   └── final_project/                                 # Final project report
+└── archive/                                           # Archived scripts and old versions
+````
 
 ## Usage
 
