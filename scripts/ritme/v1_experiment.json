@@ -1,0 +1,17 @@
+{
+	"tracking_uri": "mlruns",
+	"fully_reproducible": false,
+	"experiment_tag": "v1_experiment",
+	"target": "sleep_quality",
+	"group_by_column": "infant_id",
+	"seed_data": 12,
+	"seed_model": 12,
+	"time_budget_s": 428400,
+	"max_cuncurrent_trials": 10,
+	"ls_model_types": [
+		"linreg",
+        "rf"
+	],
+	"model_hyperparameters": {},
+	"optuna_searchspace_sampler": "TPESampler"
+}
