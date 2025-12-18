@@ -121,6 +121,39 @@ The distance matrices Jaccard and Bray-curtis were examined with PCoA \cite{halk
 Statistical testing of beta diversity on braycurtis distances was performed using Adnois, a multivariate analysis of variance with permutations \cite{martinez_arbizu_pedro_pairwise_nodate}. This approach accounts for the longitudinal study design and controls for repeated sampling per infant as well as the non-independence of samples across timepoints.
 R was used to perform this analysis, since the Adonis function in the q2-longitudinal plugin is currently not functional and multilevel sample comparison is not implemented yet \cite{lizgehret_depr_nodate, bokulich_enable_nodate}.
 
+\subsubsection*{Differential Abundance / Temporal Trajectories}
+In order to quantify global temporal trends in microbiome composition in the gut microbiome of infants, ANCOM-BC2 is implemented \cite{lin_multigroup_2024}. 
+To control for repeated sampling, a random intercept is fitted for each infant. 
+As the SILVA databased used for taxonomy classification does not provide reliable species level information, the taxa were collapsed on genus level.
+Taxa that are present in fewer than 10 samples were filtered and a prevalence cutoff of 0.05 was provided to ANCOM-BC2.
+
+Inter-infant variability of these trends is assessed with the feature-volatility action in the longitudinal QIIME plugin \cite{bokulich_q2-longitudinal_2018}.
+We train a Random Forest Regressor to identify taxa that are important for predicting the time point of gut microbiome sampling. 
+Plotting the relative frequency of these taxa for each infant over time gives insight into infant-specific changes as well as global trends.
+
+PICRUSt2 allows us to predict the functional potential of the gut microbiome based on amplicon data \cite{langille_predictive_2013}.
+The resulting pathway abundance are analyzed with ANCOM-BC2 analogous to the method described before.
+In order to identify overarching themes of biological activity at the different timepoints, we perform Gene Set Enrichment Analysis as implemented in GSEApy \cite{subramanian_gene_2005,mootha_pgc-1alpha-responsive_2003,fang_gseapy_2023}.
+Pathway sets used for this analysis are based on the secondary pathway level of the MetaCyc database \cite{caspi_metacyc_2014}. 
+The enrichment rank of each pathway is determined by calculating $-\operatorname{sgn}(\text{LFC}) \log_{10}(q)$ and sorting the set in descending order.
+This sorted set is then used for preranked GSEA.
+
+\subsubsection*{Gut Microbiome Diversity and Behavioral Outcome}
+Pearson correlation of the behavioral measures "Behavioral Development", "Sleep Quality", "Sleep Rhythmiticity", and "Attenuated Caring Style" with each other and the age of the infants is calculated.
+To quantify the contribution of k-mer-based Shannon entropy to the outcome measures, a Mixed Linear Model is fit using QIIME longitudinal \cite{bokulich_q2-longitudinal_2018}.
+By controlling for infant age and repeated sampling (infant id), we isolate the effect of the gut microbiome diversity.
+
+\subsubsection*{Predicting Behavior with Microbiome Composition}
+In order to investigate the influence of microbiome composition on behavioural measures, multiple machine learning models were trained. 
+"Behavioural Development" was predicted using center-log transformed abundance data, as recommended for compositional count data \cite{quinn_field_2019,gloor_microbiome_2017}. 
+Nested cross-validation with hyperparamter tuning was performed for a Lasso and Gradient Boosted Regressor \cite{caspi_metacyc_2014}. 
+To assess generalizing capabilities of the model to unseen timepoints, the cross-validation splits were assigned non-overlapping groups based on infant id and timepoint.
+"Sleep Quality" was predicted with the same approach. 
+Additionally, pathway abundance as predicted by PICRUSt2 was used as model features.
+Performance was assessed by inspecting per-fold performance metrics for train and test set of the outer folds, as well as by calculating pooled performance metrics over all predictions.
+
+%TODO maybe explain here why full feature table?
+
 \begin{figure*}[ht]
   \centering
   \includegraphics[width=1\textwidth,trim={2cm 8cm 2cm 8cm}, clip]{misc/workflow_preprocessing.pdf}
@@ -163,6 +196,48 @@ This first visual inspection indicated that the microbiome of infants differs st
 Assessment of inter-infant differences using Adonis revealed significant differences between infants ($p<0.001$). Interestingly, significant differences were also observed between timepoints. The pairwise comparisons showed significant differences between 2 and 6 months ($p < 0.001$) and 4 and 6 months ($p<0.001$), while no significant difference was found between 2 and 4 months ($p = 0.295$). This suggests that the microbiome of 6 month old infants is very distinct from that of younger infants.\\
 Including both variable into the model revealed that the infant id ($R^2 = 0.64$) explains substantially more of the variance in the distance matrix than timepoint ($R^2 = 0.04$).  
 This also quantitatively confirms the observations from the PCoA analysis. Adonis showed that the effect of the infant is so strong that it can mask the effect of timepoint, explaining why no clear clustering by timepoint was observed when infant information was excluded.\\
+
+\subsection{Differential Abundance / Temporal Trajectories}
+
+*Figure relative abundance* shows clear changes in microbiome composition over time. Enterobacteria and Bifidobacteria decrease slightly in abundance, whereas Veillonella increase in abundance and dominate the gut microbiome of older infants.
+Multiple members of the Bacillota phylum are significantly enriched (q < 0.05) at 6 months compared to two months, such as Phascolarctobacterium, Ruminococcus and Enterococcus. 
+Other members, such as Clostridum and Staphylococcus, are depleted significantly. 
+The gram-negative genus Klebsiella shows significantly lower abundance  at 6 months.
+
+The taxa volatility plot for Veillonella (see Figure) show a general trend of increased abundance from 4 to 6 months. 
+Nevertheless, not all infants follow this trend, as multiple do not show increased abundance over time. 
+The inverse is true for the Enterobacteriaceae family, as there is a general decrease in abundance but two infants that show contradictory behaviour.
+
+Differential abundance analysis of predicted pathway abundance in the gut microbiome at two and 6 months reveals multiple trends (Figure). 
+Acetly-CoA fermentation (PWY-5676) is enriched 2-fold at 6 compared to 2 months. 
+Fucose and N-acetylneuraminate degradation is significantly depleted at 6 months. 
+Multiple pathways related to gram-negative bacteria (LPS synthesis, O-antigen biosynthesis and enterobacterial common antigen synthesis) are less abundant at 6 months.
+
+GSEA reveals no significantly enriched or depleted pathway sets between 2 and 6 months. 
+
+\subsection*{Gut Microbiome Diversity and Behavioral Outcom}
+
+Figure heatmap shows the correlation and corresponding significance levels of the outcome measures. 
+Sleep quality and sleep rhtyhmicity correlate positively with age. 
+Sleep rhythmiticity also correlates positively with an attenuated caring style of parents.
+The behavioral development score correlates negatively with age. 
+
+K-mer based Shannon entropy does not have a significant effect on any outcome measure tested. 
+The slope of the relationship between microbiome diversity and behavioral outcome is near zero for three out of four measures (see Figure correlation) with non-significant p-values. 
+Only sleep rhythmiticity has a moderately positive association with Shannon entropy. 
+The same analysis performed with conventional Shannon entropy yields nearly identical results. 
+
+\subsection*{Predicting Behavior with Microbiome Composition}
+% TODO CHAGNE to POOLED metrics
+
+Naive prediction of behavioural development with microbiome composition without taking into account  dependence of samples yields high predictive performance (see Figure). 
+The Lasso regression achieves an RMSE of 16.4937 ± 4.5039 and $R^2$ of 0.4632 ± 0.5222 on the test splits.
+When taking into account dependence and enforcing generalization to unseen infant - timepoint combinations, performance drops drastically (see Figure).
+Test $RMSE$ and $R^2$ increase or drop to 19.9908 ± 13.4954 and -1.0823 ± 1.5417
+respectively. 
+The gradient boosted regressor performs worse ($RMSE = 27.7251 ± 14.8527$, $R^2 = -2.1999 ± 2.9022$) and is plagued by overfitting as indicated by overly optimistic training statistics ($RMSE = 0.0000 ± 0.0000$, $R^2 = 1.0000 ± 0.0000$).
+
+The Lasso Regression trained to predict sleep quality with microbiome composition achieves  0.1208 ± 0.0234
 
 \begin{figure*}[ht]
   \centering
