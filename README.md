@@ -22,32 +22,32 @@ An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencin
 A QIIME 2025.07 environment with q2-boots and q2-kmerizer is needed. Additional dependencies are `openpyxl`, `plotly` and `gseapy`.
 A QIIME 2025.10 environment does not work at the moment, due to a [bug](https://forum.qiime2.org/t/demux-summarize-broken-after-upgrading-from-2025-7-to-2025-10/33852) regarding the demux plugin.
 
-    For **macOS**:
+For **macOS**:
 
-    ```bash
-    CONDA_SUBDIR=osx-64 conda env create \
-        --name microbEvolve \
-        --file environment.yml \
-        --solver=libmamba
-    conda activate microbEvolve
-    conda config --env --set subdir osx-64
-    ```
+```bash
+CONDA_SUBDIR=osx-64 conda env create \
+    --name microbEvolve \
+    --file environment_mac.yml \
+    --solver=libmamba
+conda activate microbEvolve
+conda config --env --set subdir osx-64
+```
 
-    For **Linux**:
+For **Linux**:
 
-    ```bash
-    conda env create \
-        --name microbEvolve \
-        --file environment.yml \
-        --solver=libmamba
-    conda activate microbEvolve
-    ```
+```bash
+conda env create \
+    --name microbEvolve \
+    --file environment.yml \
+    --solver=libmamba
+conda activate microbEvolve
+```
 
-    For **Windows**:
+For **Windows**:
 
     Please install Linux.
 
-    In case openpyxl installation fails, try installing with pip (`pip install openpyxl`).
+In case openpyxl installation fails, try installing with pip (`pip install openpyxl`).
 
 4. **Verify installation:**
 
