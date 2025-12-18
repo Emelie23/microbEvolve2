@@ -11,6 +11,10 @@ log "Starting taxonomy classification script"
 
 data_dir="../data"
 
+# Ensure output directories exist
+mkdir -p "$data_dir/raw"
+mkdir -p "$data_dir/processed"
+
 # Check if required input file exists
 if [[ ! -f "$data_dir/raw/dada2_rep_set.qza" ]]; then
     log "ERROR: Required input file not found: $data_dir/raw/dada2_rep_set.qza"
@@ -23,32 +27,21 @@ log "Input file verified: $data_dir/raw/dada2_rep_set.qza"
 # Check if classifier files exist
 missing_classifiers=false
 
-if [[ ! -f "$data_dir/raw/silva-138-99-515-806-nb-classifier-unweighted.qza" ]]; then
-    log "WARNING: Unweighted classifier not found: $data_dir/raw/silva-138-99-515-806-nb-classifier-unweighted.qza"
-    missing_classifiers=true
-fi
+log "Downloading weighted classifier for human stool samples..."
+wget -O "$data_dir/raw/silva-138-99-515-806-nb-classifier-weighted-stool.qza" \
+    https://www.arb-silva.de/fileadmin/silva_databases/current/QIIME2/2025.7/SSU/V4-515f-806r/weighted/human-stool/SILVA138.2_SSURef_NR99_weighted_classifier_V4-515f-806r_human-stool.qza
+log "Weighted classifier downloaded successfully"
 
 if [[ ! -f "$data_dir/raw/silva-138-99-515-806-nb-classifier-weighted-stool.qza" ]]; then
     log "WARNING: Weighted classifier not found: $data_dir/raw/silva-138-99-515-806-nb-classifier-weighted-stool.qza"
-    missing_classifiers=true
+    missing_classifiers="true"
 fi
 
-if [[ "$missing_classifiers" == "true" ]]; then
-    log "ERROR: One or more classifier files are missing."
-    log "Please download the classifiers first by running:"
-    log "  bash $HOME/microbEvolve2/scripts/taxonomy_dowload_classifier.sh"
-    exit 1
-fi
-
-log "All classifier files verified"
-
-# Ensure output directories exist
-mkdir -p "$data_dir/raw"
-mkdir -p "$data_dir/processed"
+log "Classifier file verified"
 
 # First we will get download the reference database
 # Version 138.2 is the latest version and we want small subunit (SSU) data.
-# We also choose the filtereds sequence dataset (99 NR)
+# We also choose the filtered sequence dataset (99 NR)
 
 # We will try two methods for classifying our data:
 # 1. Use the pretrained classifier from SILVA for the V4 region without weights
@@ -57,7 +50,7 @@ mkdir -p "$data_dir/processed"
 log "Starting taxonomic classification with weighted classifier..."
 
 qiime feature-classifier classify-sklearn \
-    --i-classifier "$data_dir/raw/silva-138-99-515-806-nb-classifier-weighted-stool.qza" \
+    --i-classifier $data_dir/raw/silva-138-99-515-806-nb-classifier-weighted-stool.qza \
     --i-reads $data_dir/raw/dada2_rep_set.qza \
     --p-n-jobs 0 \
     --p-reads-per-batch 2000 \
@@ -79,31 +72,5 @@ qiime taxa barplot \
     --m-metadata-file $data_dir/raw/metadata_per_sample.tsv \
     --o-visualization $data_dir/processed/taxa-bar-plots_weighted.qzv
 log "Taxa bar plot for weighted taxonomy results created"
-
-log "Starting taxonomic classification with unweighted classifier..."
-
-qiime feature-classifier classify-sklearn \
-    --i-classifier "$data_dir/raw/silva-138-99-515-806-nb-classifier-unweighted.qza" \
-    --i-reads $data_dir/raw/dada2_rep_set.qza \
-    --p-n-jobs 0 \
-    --p-reads-per-batch 2000 \
-    --o-classification $data_dir/raw/taxonomy_unweighted.qza
-
-log "Unweighted taxonomic classification completed"
-log "Creating visualization for unweighted taxonomy results..."
-
-qiime metadata tabulate \
-    --m-input-file $data_dir/raw/taxonomy_unweighted.qza \
-    --o-visualization $data_dir/processed/taxonomy_unweighted.qzv
-
-log "Unweighted taxonomy visualization created"
-
-log "Creating taxa bar plot for unweighted taxonomy results..."
-qiime taxa barplot \
-    --i-table $data_dir/raw/dada2_table.qza \
-    --i-taxonomy $data_dir/raw/taxonomy_unweighted.qza \
-    --m-metadata-file $data_dir/raw/metadata_per_sample.tsv \
-    --o-visualization $data_dir/processed/taxa-bar-plots_unweighted.qzv
-log "Taxa bar plot for unweighted taxonomy results created"
 
 log "Taxonomy classification script completed successfully!"
