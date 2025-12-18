@@ -24,24 +24,24 @@ log "Starting bootstrapping..."
 
 # Run BOOTs for kmer-diversity on collapsed and uncollapsed table
 
-! qiime boots kmer-diversity \
+qiime boots kmer-diversity \
     --i-table $data_dir/raw/table_collapsed.qza \
     --i-sequences $data_dir/raw/dada2_rep_set.qza \
     --m-metadata-file $data_dir/raw/metadata_collapsed.tsv \
     --p-sampling-depth 9000 \
-    --p-n 10 \
+    --p-n 100 \
     --p-kmer-size 12 \
     --p-replacement \
     --p-alpha-average-method median \
     --p-beta-average-method medoid \
     --output-dir $data_dir/raw/boots_kmer_diversity_collapsed
 
-! qiime boots kmer-diversity \
+qiime boots kmer-diversity \
     --i-table $data_dir/raw/dada2_table.qza \
     --i-sequences $data_dir/raw/dada2_rep_set.qza \
     --m-metadata-file $data_dir/raw/metadata.tsv \
     --p-sampling-depth 9000 \
-    --p-n 10 \
+    --p-n 100 \
     --p-kmer-size 12 \
     --p-replacement \
     --p-alpha-average-method median \
