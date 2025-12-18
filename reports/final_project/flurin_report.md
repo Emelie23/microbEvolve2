@@ -26,7 +26,16 @@ Pearson correlation of the behavioral measures "Behavioral Development", "Sleep 
 To quantify the contribution of k-mer-based Shannon entropy to the outcome measures, a Mixed Linear Model is fit using QIIME longitudinal (citation).
 By controlling for infant age and repeated sampling (infant_id), we isolate the effect of the gut microbiome diversity.
 
-### Predicting Behaviour with Microbiome Composition
+### Predicting Behavior with Microbiome Composition
+
+In order to investigate the influence of microbiome composition on behavioural measures, multiple machine learning models were trained. 
+"Behavioural Development" was predicted using center-log transformed abundance data, as recommended for compositional count data (citation). 
+Nested cross-validation with hyperparamter tuning was performed for a Lasso and Gradient Boosted Regressor (citation?). 
+To assess generalizing capabilities of the model to unseen timepoints, the cross-validation splits were assigned non-overlapping groups based on infant id and timepoint.
+"Sleep Quality" was predicted with the same approach. 
+Additionally, pathway abundance as predicted by PICRUSt2 was used as model features.
+Performance was assessed by inspecting per-fold performance metrics for train and test set of the outer folds, as well as by calculating pooled performance metrics over all predictions
+maybe explain here why full feature table?
 
 ## Results
 
@@ -60,4 +69,20 @@ The slope of the relationship between microbiome diversity and behavioral outcom
 Only sleep rhythmiticity has a moderately positive association with Shannon entropy. 
 The same analysis performed with conventional Shannon entropy yields nearly identical results. 
 
-### Predicting Behaviour with Microbiome Composition
+### Predicting Behavior with Microbiome Composition
+
+CHAGNE to POOLED metrics
+
+Naive prediction of behavioural development with microbiome composition without taking into account  dependence of samples yields high predictive performance (see Figure). 
+The Lasso regression achieves an RMSE of 16.4937 ± 4.5039 and $R^2$ of 0.4632 ± 0.5222 on the test splits.
+When taking into account dependence and enforcing generalization to unseen infant - timepoint combinations, performance drops drastically (see Figure).
+Test $RMSE$ and $R^2$ increase or drop to 19.9908 ± 13.4954 and -1.0823 ± 1.5417
+respectively. 
+The gradient boosted regressor performs worse ($RMSE = 27.7251 ± 14.8527$, $R^2 = -2.1999 ± 2.9022$) and is plagued by overfitting as indicated by overly optimistic training statistics ($RMSE = 0.0000 ± 0.0000$, $R^2 = 1.0000 ± 0.0000$).
+
+The Lasso Regression trained to predict sleep quality with microbiome composition achieves  0.1208 ± 0.0234
+
+
+
+
+
