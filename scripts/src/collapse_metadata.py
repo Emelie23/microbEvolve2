@@ -16,7 +16,7 @@ metadata = metadata.rename(columns={"infant_time": "sampleid"})
 metadata_collapsed = metadata.groupby("sampleid", as_index=False).first()
 metadata_collapsed.to_csv(f"{data_dir}/raw/metadata_collapsed.tsv", sep="\t", index=False)
 
-#create metadata file with type information for every column
+# create metadata file with type information for every column
 type_information = pd.DataFrame(
     # index=["#q2:types"],
     columns=metadata_collapsed.columns,
@@ -42,6 +42,6 @@ type_information = pd.DataFrame(
 
 # collapse metadata with type information to have one representative sample per infant per timepoint
 metadata_collapsed_withtypes = pd.concat([type_information, metadata_collapsed])
-metadata_collapsed_withtypes.to_csv(f"{data_dir}/raw/metadata_collapsed_withtypes_test.tsv", sep="\t", index=False)
+metadata_collapsed_withtypes.to_csv(f"{data_dir}/raw/metadata_collapsed_withtypes.tsv", sep="\t", index=False)
 
 print(f"Metadata collapsed successfully, collapsed_metadata.tsv and metadata_collapsed_withtypes.tsv stored in {data_dir}/raw")
