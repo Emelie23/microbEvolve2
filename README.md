@@ -1,10 +1,7 @@
 # MicrobEvolve2
 
-An infant gut microbiome analysis project focused on 16S rRNA amplicon sequencing data processing and analysis.
-
-## Project Overview
-
-<!-- TODO -->
+This project was carried out as part of the "Applied Bioinformatics: Microbiome" course taught by Prof. Nicolas Bokulich and supervised by Fannie Kerff.
+It focuses on processing and analysis of 16S rRNA amplicon sequencing data from infant gut microbiome samles.
 
 ## Setup
 
@@ -70,10 +67,6 @@ All notebooks follow the same structure. Each step contains a short explanation,
 
 Additional exploratory or parameter-testing scripts are stored in the `archive` directory. They are not directly included in the notebooks, but the documentation of each step notes when archived code contributed to the final version.
 
-If you want to run the entire code yourself please read *Run analysis pipeline*: TODO
-
-Please submit jobs on Euler from the `scripts` directory to ensure that all relative paths resolve correctly.
-
 ```
 microbevolve2/
 ├── README.md                                          # This file
@@ -91,7 +84,7 @@ microbevolve2/
 │   ├── 05-2_prediction.ipynb                          # Outcome measure prediction Notebook
 │   ├── src/                                           # Shell Scripts containing the code
 │   ├── figures/                                       # Tracked Figures used in Notebooks (e.g workflow images)
-│   └── ritme/                                         # XXX
+│   └── ritme/                                         # Scripts and config for ritme framework
 ├── report/                                            # Reports
 │   ├── midterm/                                       # Midterm report
 │   └── final_project/                                 # Final project report
@@ -100,14 +93,8 @@ microbevolve2/
 
 ## Usage
 
-### Quick Start
+All Jupyter Notebooks have been executed and should include saved output, such as figures. 
+In case you only want to follow the analysis steps, looking through the notebooks and scripts should be sufficient.
+In case you wish for more detailed insights, you can run the notebooks yourself. Please note that they need to be run sequentially, as indicated by the filenames, as some analysis depend on the output of other notebooks. At the top of each notebook a shell command indicates how the respective notebook can be executed on a SLURM cluster such as Euler.
 
-1. **Activate the environment:**
-   ```bash
-   conda activate microbevolve2
-   ```
-
-2. **Run the analysis pipeline:**
-<!-- TODO -->
-
----
+Visualizations and artifacts created by QIIME are not being tracked in this repo. Therefore you either need to perform all analysis steps individually or download the relevant data. We provide all artifacts and visualizations hosted on [polybox](https://polybox.ethz.ch/index.php/s/CxrMwtmmzGmgXjc).
