@@ -364,36 +364,36 @@ Again, overfitting is the main cause of this poor performance.
 
 \subsection*{Discussion}
 
-This project falls nicely into the existing literature landscape.
+The results of this project align well with the existing literature
 We were able to confirm an increase in alpha diversity of the infant gut microbiome over time when looking at ASV-based Shannon entropy.
 The discrepancy with k-mer-based diversity could be linked to the genetic relationship between taxa.
-Even though richness and evenness of taxa might increase, they might be closely related, sharing many k-mers.
+Even though richness and evenness of taxa increases, they might be closely related and therefore share many k-mers, resulting in non-significant differences in the k-mer-based approach.
 
 Beta-diversity analysis has revealed that the gut microbiome seems to have a distinct state at 6 months.
-Dirichlet multinomial mixtures modeling of infant gut microbiome samples has also shown 6 months as a breaking point for clusters \cite{stewart_temporal_2018}.
-
-This might be linked to changes in infant diet, as conventionally around this time weening starts and more complex foods are introduced.
-This goes hand in hand with colonization of the gut by taxa that find new metabolic niches. 
+Dirichlet multinomial mixtures modeling of infant gut microbiome samples has also shown 6 months as a breaking point for clusters, underlining our results \cite{stewart_temporal_2018}. This might be linked to changes in infant diet, as weaning and introduction of more complex foods conventionally starts at this time.
+Changes in diet go hand in hand with colonization of the gut by taxa that find new metabolic niches. 
 We were able to observe this by looking into predicted pathway abundance. 
-From 2 to 6 months, pathways associated with human milk oligosaccharide (HMO) breakdown, such as fucose and acetlyneuraminate degradation, decreased in abundance \cite{yu_comprehensive_2025,duman_human_2024}.
+From 2 to 6 months, pathways associated with human milk oligosaccharide (HMO) breakdown, such as fucose and acetlyneuraminate degradation, decreased in abundance, which is most likely associated with weaning \cite{yu_comprehensive_2025,duman_human_2024}.
 The increase in Acetly-CoA fermentation can be linked to the introduction of solid foods that contain undigestable fibers.
 
 \balance
 
-Differential abundance analysis of microbiome composition did not reproduce all results that have been reported in the literature.
-We did not observe a globally significant decrease in Bifidobacteria or Enterobacteria, as has been reported \cite{koenig_succession_2011}.
+Differential abundance analysis of microbiome composition did not reproduce hallmark results that have been reported in the literature.
+For example, we did not observe a globally significant decrease in Bifidobacteria or Enterobacteria \cite{koenig_succession_2011}.
 This contrasts the findings regarding HMO degradation, as Bifidobacteria are one of the main drivers of this phenomenon.
 
-A major factor influencing all analysis performed is the individuality of the infant gut microbiome.
-Dimensionality reduction and adonis have revealed clear clustering of samples from the same infant regardless of timepoint.
+A major factor influencing all analysis performed in this project is the individuality of the infant gut microbiome.
+Dimensionality reduction and Adonis have revealed clear clustering of samples from the same infant.
 Controlling for dependence of samples has therefore been a crucial pillar of our work.
-This was further complicated by gaps in stool samples.
-Missing entire timepoints from multiple makes it increasingly difficult to identify global trends over time.
-Despite the difficulties concerning patient sampling, stricter sampling and more data would only enhance future work.
+This was further complicated by gaps in infant sampling, resulting in only five infants having been sampled at all three timepoints.
+Missing entire timepoints from multiple infants makes it increasingly difficult to identify global trends over time.
+Despite the difficulties concerning patient sampling, stricter sampling and a larger cohort would enhance future work.
 
-Additionally, the issue with limited sample size when investigating highly complex and multifactorial neurological outcomes was illustrated by poor predictive performance of machine learning models.
-Even though the gut microbiome has previously been linked to such outcomes and biologically reasonable assumptions exist \cite{sen_microbiota_2021}, the relationship is with high likelihood complex and messy.
+Additionally, the issue with limited sample size when investigating highly complex and multifactorial neurocognitive outcomes was illustrated by poor predictive performance of machine learning models.
+Even though the gut microbiome has previously been linked to such outcomes and biologically reasonable assumptions exist, the relationship is with high likelihood complex and messy \cite{sen_microbiota_2021}.
 More sophisticated optimization and potentially hypothesis-driven feature enrichment in combination with large sample sizes might enable many more discoveries.
+
+In conclusion, this work confirmed that microbial diversity and composition change during the first months of life. Associations between behavioural outcome measures and microbiome changes were challenging to detect, underscoring the difficulty of linking such multifactorial measures to the microbiome.
 
 \subsection*{Code and Data Availability}
 
