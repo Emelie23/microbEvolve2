@@ -96,9 +96,9 @@ The gut microbial communities play a key role in immune, metabolic, and endocrin
 Growing evidence suggests a bidirectional relationship between sleep and gut microbiome composition, with many sleep disorders linked to alterations in the microbiome \cite{sen_microbiota_2021}.
 Identifying key microbial differences linked to neurocognitive functions, such as sleep or rhythmicity, could uncover potential therapeutic targets, for example, through targeted nutritional interventions to improve sleep.
 
-The goal of this project is to analyze the development of microbial diversity in infants during their first six months of life. We also aim to assess compositional changes and explore their functional implications. In a second part, we investigate how microbiome changes relate to behavioural outcome measures and attempt to predict these outcomes from microbial profiles.
+The goal of this project is to analyze the development of microbial diversity in infants during their first 6 months of life. We also aim to assess compositional changes and explore their functional implications. In a second part, we investigate how microbiome changes relate to behavioural outcome measures and attempt to predict these outcomes from microbial profiles.
 
-We work with data from an observational longitudinal cohort study that followed healthy infants during their first six months of life \cite{kerff_gut_2025}. Stool samples were collected at 2, 4, and 6 months, along with behavioural measures. The V4 region of the 16S rRNA gene was sequenced using Illumina NextSeq2000.
+We work with data from an observational longitudinal cohort study that followed healthy infants during their first 6 months of life \cite{kerff_gut_2025}. Stool samples were collected at 2, 4, and 6 months, along with behavioural measures. The V4 region of the 16S rRNA gene was sequenced using Illumina NextSeq2000.
 
 \begin{figure*}[p]
 \centering
@@ -189,7 +189,7 @@ To investigate the influence of microbiome composition on behavioural measures, 
 Nested cross-validation with hyperparamter tuning is performed for a Lasso and Gradient Boosted Regressor \cite{caspi_metacyc_2014}. 
 To assess generalizing capabilities of the model to unseen timepoints, the cross-validation splits were assigned non-overlapping groups based on infant id and timepoint.
 ``Sleep Quality'' is predicted with the same approach. 
-Additionally, pathway abundance as predicted by PICRUSt2 is used as model features.
+Additionally, pathway abundance, as predicted by PICRUSt2, is used as model features.
 Performance was assessed by inspecting per-fold performance metrics for train and test set of the outer folds, as well as by calculating pooled performance metrics over all predictions.
 %TODO maybe explain here why full feature table?
 
@@ -225,7 +225,7 @@ Performance was assessed by inspecting per-fold performance metrics for train an
 \section*{Results}
 
 \subsection*{Inter-Infant and Inter-Timepoint Differences}
-For the k-mer-based analysis, no significant differences in Shannon diversity are observed between 2, 4, and 6 months, indicating that alpha diversity remains stable across infants during the first six months of life. Interestingly, when looking at the alpha diversity calculated from ASV-based core metrics, there is a significant difference between 2 and 4 months ($q=0.089$) and between 2 and 6 months ($q=0.089$).
+For the k-mer-based analysis, no significant differences in Shannon diversity are observed between 2, 4, and 6 months, indicating that alpha diversity remains stable across infants during the first 6 months of life. Interestingly, when looking at the alpha diversity calculated from ASV-based core metrics, there is a significant difference between 2 and 4 months ($q=0.089$) and between 2 and 6 months ($q=0.089$).
 
 PCoA based on Jaccard distances do not show any visible clustering, whereas PCoA using Bray-Curtis distances does. This indicates that the differences between the samples are driven by changes in relative abundance rather than the presence or absence of specific taxa.
 
@@ -239,7 +239,7 @@ This also quantitatively confirms the observations from the PCoA analysis. Adoni
 \subsection*{Temporal Trajectories in the Infant Gut Microbiome}
 
 Figure \ref{fig:relabundancefamilies} shows clear changes in microbiome composition over time. Enterobacteria and Bifidobacteria decrease slightly in abundance, whereas Veillonella increase in abundance and dominate the gut microbiome of older infants.
-Multiple members of the Bacillota phylum are significantly enriched  ($q < 0.05$) as indicated by ANCOM-BC2 at 6 months compared to two months, such as Phascolarctobacterium, Ruminococcus and Enterococcus. 
+Multiple members of the Bacillota phylum are significantly enriched  ($q < 0.05$) as indicated by ANCOM-BC2 at 6 months compared to 2 months, such as Phascolarctobacterium, Ruminococcus and Enterococcus. 
 Other members, such as Clostridum and Staphylococcus, are depleted significantly.
 The gram-negative genus Klebsiella shows significantly lower abundance at 6 months.
 Surprisingly, Veillonella do not show a significant difference in abundance.
@@ -249,7 +249,7 @@ Nevertheless, not all infants follow this trend, as multiple do not show increas
 The inverse is true for the Enterobacteriaceae family, as there is a general decrease in abundance but two infants that show contradictory behaviour.
 This again highlights the high individualitiy of the infant gut microbiome.
 
-Differential abundance analysis of predicted pathway abundance in the gut microbiome at two and 6 months reveals multiple trends (see Figure \ref{fig:pathwaydiffabundance}).
+Differential abundance analysis of predicted pathway abundance in the gut microbiome at 2 and 6 months reveals multiple trends (see Figure \ref{fig:pathwaydiffabundance}).
 These results need to be interpreted cautiously, as predicting functional potential with PICRUSt2 introduces additional noise and uncertainty which might not reflect the biological reality.
 Acetly-CoA fermentation (PWY-5676) is enriched 2-fold at 6 compared to 2 months. 
 This pathway is associated with short chain fatty acid digestion that might stem from fiber-containing foods.
@@ -269,7 +269,7 @@ Subtle changes in biological niches can be overpowered due to the number of path
 \begin{figure*}[tbp]
   \centering
   \includegraphics[width=0.8\linewidth]{../../figures/differential_pathway_abundance_6months_vs_2months.pdf}
-  \caption{Differential abundance of selected pathways comparing two to six months}
+  \caption{Differential abundance of selected pathways comparing 2 to 6 months}
   \label{fig:pathwaydiffabundance}
 \end{figure*}
 
@@ -284,7 +284,7 @@ Subtle changes in biological niches can be overpowered due to the number of path
 
 Figure \ref{fig:corrheatmap} shows the correlation and corresponding significance levels of the outcome measures. 
 Sleep quality and sleep rhythmicity correlate positively with age. 
-This is to be expected, as most parents can tell a story about newborns sleeping irregularly and requiring lots of attention.
+This is to be expected, as most parents can tell a story about newborns sleeping irregularly.
 Sleep rhythmicity also correlates positively with an attenuated caring style of parents.
 The behavioural development score correlates negatively with age. 
 
@@ -293,7 +293,7 @@ Figure \ref{fig:regshannon} does not show the results of the MLE model but rathe
 The slope of the relationship between microbiome diversity and behavioural outcome is near zero for sleep quality and caring style with non-significant p-values ($p = 0.633,\; 0.904$ respectively).
 The effect of Shannon entropy on behavioural development is slightly stronger ($\beta = 18.524$) but not significant ($p = 0.133$).
 Sleep rhythmicity has a moderately positive association with Shannon entropy ($\beta = 0.113$, $p = 0.052$). 
-The same analysis performed with conventional Shannon entropy yields nearly identical results.
+The same analysis performed with ASV-derived Shannon entropy yields nearly identical results.
 
 \begin{figure}[tb]
   \centering
@@ -312,12 +312,12 @@ The same analysis performed with conventional Shannon entropy yields nearly iden
 \subsection*{Predicting Behaviour with Microbiome Composition}
 
 Naive prediction of behavioural development with microbiome composition without considering dependence of samples yields good predictive performance (see Figure \ref{fig:pred_behaviour_naive_lasso}, pooled $R^2 = 0.69$, $RMSE = 17.01$). 
-The Lasso regression achieves an $RMSE$ of $16.4937 \pm 4.5039$ and $R^2$ of $0.4632 \pm 0.5222$ on the test splits.
+The Lasso regression achieves a $RMSE$ of $16.49 \pm 4.50$ and $R^2$ of $0.46 \pm 0.52$ on the test splits.
 When considering dependence and enforcing generalization to unseen infant - timepoint combinations, performance drops drastically (see Figure \ref{fig:pred_behaviour_generalize_lasso}).
-Pooled $R^2$ and $RMSE$ drop or increase to 0.05 and 29.49 respectively.
-The gradient boosted regressor performs worse (pooled $R^2 = -0.20$, $RMSE = 33.19$) and is plagued by overfitting as indicated by overly optimistic training statistics (per-fold $RMSE = 0.0000 \pm 0.0000$, $R^2 = 1.0000 \pm 0.0000$). 
+Pooled $R^2$ and $RMSE$ drops and increases to 0.05 and 29.49, respectively.
+The gradient boosted regressor performs worse (pooled $R^2 = -0.20$, $RMSE = 33.19$) and is plagued by overfitting as indicated by overly optimistic training statistics (per-fold $RMSE = 0.00 \pm 0.00$, $R^2 = 1.00 \pm 0.00$). 
 This indicates strong overfitting of the model on the training data which does not allow for generalization to the test data.
-The higher interal complexity of this model compared to a Lasso Regression has the advantage of potentially picking up abstract information in the data but also increases the risk of overfitting, which has happened here.
+The higher internal complexity of this model compared to a Lasso Regression has the advantage of potentially picking up abstract information in the data but increases the risk of overfitting, which has happened here.
 
 Prediction of sleep qualitity follows similar results.
 Generalizing to unseen timepoints of infants leads to very limited predictive performance (see Figure \ref{fig:pred_sleep_microbiome_lasso}).
@@ -372,7 +372,7 @@ Dirichlet multinomial mixtures modeling of infant gut microbiome samples has als
 This might be linked to changes in infant diet, as conventionally around this time weening starts and more complex foods are introduced.
 This goes hand in hand with colonization of the gut by taxa that find new metabolic niches. 
 We were able to observe this by looking into predicted pathway abundance. 
-From two to six months, pathways associated with human milk oligosaccharide (HMO) breakdown, such as fucose and acetlyneuraminate degradation, decreased in abundance \cite{yu_comprehensive_2025,duman_human_2024}.
+From 2 to 6 months, pathways associated with human milk oligosaccharide (HMO) breakdown, such as fucose and acetlyneuraminate degradation, decreased in abundance \cite{yu_comprehensive_2025,duman_human_2024}.
 The increase in Acetly-CoA fermentation can be linked to the introduction of solid foods that contain undigestable fibers.
 
 \balance
