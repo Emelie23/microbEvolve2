@@ -68,6 +68,7 @@
 
 % ABSTRACT ----- (if needed)
 \begin{abstract}
+The first ya
 
 {\color{gray}\hrule}
 \medskip
@@ -95,7 +96,7 @@ We worked with the data from an observational longitudinal cohort study that fol
 
 \section*{Methods}
 \subsection*{Preprocessing}
-The preprocessing of the 16S rRNA amplicon sequencing data includes data importing,  control, cutadapt and denoising, taxonomic classification and feature table preparation (see Figure \ref{fig:workflow_preprocessing}). \\
+The preprocessing of the 16S rRNA amplicon sequencing data includes data importing, quality control, cutadapt and denoising, taxonomic classification and feature table preparation (see Figure \ref{fig:workflow_preprocessing}). \\
 First, the demultiplexed sequences which were provided as QIIME 2 artifacts were imported along with the corresponding metadata.  control was performed next. Forward reads displayed a median  score of 34 for all base positions. The reverse reads also displayed a median of 34, which dropped to 20 for the last base positions. The variability was higher overall for the reverse reads and increases substantially towards the end of the reads. %(see Figure \ref{fig:_control}).
 Lastly, both forward and reverse sequences displayed a read length of 301 bp. \\
 The V4 region of the 16S rRNA gene is shorter than 301 bp, which indicated the presence of primers or read-through in the sequences \cite{ezbiocloud_16s_nodate}. To verify the presence of primers, we performed an initial trimming attempt with Cutadapt using V4-specific forward and reverse primer sequences \cite{martin_cutadapt_2011,earthmicrobiome_16s_nodate}. This resulted in zero sequences being trimmed, meaning that the primers were already removed by the sequencing facility. Another possible explanation for the read length was read-through, which was confirmed by running Cutadapt with the reverse complements of the primers. Approximately 4.5 million sequences were successfully truncated, resulting in reads of $\approx$250 bases, likely representing the true amplicon length. Truncation failed for many reversed reads, likely due to the low base  at the ends, preventing Cutadapt from recognizing the reverse complement primer. Therefore, truncation was perfomed directly during denoising with DADA2 \cite{callahan_dada2_2016}. Forward and reverse reads were truncated to 220 bp and 200 bp, which is sufficient to remove the read-through while maintaining an overlap of $\approx$130 base pairs. This resulted in good denoising performance, with 90\% of reads passing filtering and nearly all reads successfully merged. \\
