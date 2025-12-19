@@ -10,7 +10,8 @@ slurm-*
 *.png
 *.eps
 *.svg
-!reports/misc/*
+!reports/midterm/misc/*
+!reports/final_project/misc/*
 !scripts/figures/*
 
 # QIIME
