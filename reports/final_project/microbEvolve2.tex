@@ -67,12 +67,14 @@
 
 % ABSTRACT ----- (if needed)
 \begin{abstract}
-The first ya
+The gastrointestinal microbiome undergoes rapid development during early life and is influenced by multiple factors such as delivery mode and feeding. Increasing evidence indicates that the early microbiome composition influences not only metabolic, immune and endocrine functions, but also neurocognitive outcomes.\\
+The goal of this project was to analyze the development of microbial diversity and composition in infants during their first 6 months of life and correlate changes to behavioural outcome measures using 16S rRNA gene sequencing data.\\
+K-mer derived diversity estimation showed no significant differences in Shannon diversity between 2, 4, and 6 months. In contrast, ASV-based diversity revealed differences between 2 and 4 months and between 2 and 6 months (both $q = 0.089$). Beta diversity based on Bray-Curtis differs significantly between infants and timepoints (both $q < 0.001$). Differential abundance analysis indicated diet-associated differences in predicted pathway abundances. Lastly, no significant correlations were observed between k-mer based Shannon diversity and behavioural outcome measures, and behavioural measures could not be accurately  predicted from microbial profiles.\\
+This project confirms that microbial diversity and composition change during the first months of life and highlights the challenge of correlating complex behavioural outcomes with microbiome changes.\\
 
 {\color{gray}\hrule}
 \medskip
 \end{abstract}
-
 \end{@twocolumnfalse}
 ]
 
@@ -84,8 +86,9 @@ The first ya
 % Please use the figure* (or table*) environment instead of figure to include
 % page-wide graphics. Figure will use column-wide graphics.
 
+
 \section*{Introduction}
-During the first years of life, the gut microbiome undergoes a rapid and extensive development before stabilizing into an adult-like state \cite{milani_first_2017,fahur_bottino_early_2025,yassour_natural_2016}. This rapid development is influenced by multiple factors including the maternal microbiota, mode of delivery, feeding method and antibiotic exposure \cite{zimmermann_factors_2018,fahur_bottino_early_2025,bokulich_antibiotics_2016}. \\
+During the first years of life, the gut microbiome undergoes a rapid and extensive development before stabilizing into an adult-like state \cite{milani_first_2017,fahur_bottino_early_2025,yassour_natural_2016}. This rapid development is influenced by multiple factors including the maternal microbiota, mode of delivery, feeding method and antibiotic exposure \cite{zimmermann_factors_2018,fahur_bottino_early_2025,bokulich_antibiotics_2016}.\\
 The gut microbial communities play a key role in immune, metabolic, and endocrine pathways, and therefore directly influence host development \cite{robertson_human_2019,bokulich_antibiotics_2016}. This also explains why altered colonization events in early life are associated with the development of inflammatory disorders, metabolic diseases, and neurocognitive outcomes \cite{fahur_bottino_early_2025}.\\
 Growing evidence suggests a bidirectional relationship between sleep and gut microbiome composition, with many sleep disorders linked to alterations in the microbiome \cite{sen_microbiota_2021}.
 Identifying key microbial differences linked to neurocognitive functions, such as sleep  or rhythmicity could uncover potential therapeutic targets, for example through targeted nutritional interventions to improve sleep.\\
@@ -143,8 +146,8 @@ To assess inter-infant differences and temporal changes, diversity metrics estim
 Differences in alpha diversity between timepoints (2, 4, and 6 months) were assessed using the Kruskal–Wallis test. Shannon diversity was used as the metric, as it accounts for both richness and evenness. The analysis was performed for both k-mer and ASV derived diversity.
 %\textbf{PCoA and Statistical Testing Beta diversity}\\
 
-The distance matrices Jaccard and Bray-curtis were examined with PCoA \cite{halko_algorithm_2011}. Visualizations in this report are based on data from infants that had samples at all three timepoints (2, 4 and 6 months).  
-Statistical testing of beta diversity on braycurtis distances was performed using Adnois, a multivariate analysis of variance with permutations \cite{martinez_arbizu_pedro_pairwise_nodate}. This approach accounts for the longitudinal study design and controls for repeated sampling per infant as well as the non-independence of samples across timepoints.
+The distance matrices Jaccard and Bray-Curtis were examined with PCoA \cite{halko_algorithm_2011}. Visualizations in this report are based on data from infants that had samples at all three timepoints (2, 4 and 6 months).  
+Statistical testing of beta diversity on Bray-Curtis distances was performed using Adnois, a multivariate analysis of variance with permutations \cite{martinez_arbizu_pedro_pairwise_nodate}. This approach accounts for the longitudinal study design and controls for repeated sampling per infant as well as the non-independence of samples across timepoints.
 R was used to perform this analysis, since the Adonis function in the q2-longitudinal plugin is currently not functional and multilevel sample comparison is not implemented yet \cite{lizgehret_depr_nodate, bokulich_enable_nodate}.
 
 \subsection*{Differential Abundance / Temporal Trajectories}
@@ -179,6 +182,41 @@ Additionally, pathway abundance as predicted by PICRUSt2 was used as model featu
 Performance was assessed by inspecting per-fold performance metrics for train and test set of the outer folds, as well as by calculating pooled performance metrics over all predictions.
 %TODO maybe explain here why full feature table?
 
+\begin{figure*}[p]
+\centering
+\captionsetup[subfigure]{justification=centering}
+\begin{subfigure}{\linewidth}
+  \centering
+  \includegraphics[width=1\linewidth,trim={2cm 8cm 2cm 9.5cm}, clip]{misc/workflow_preprocessing.pdf}
+  \caption{Preprocessing}
+  \label{fig:workflow_preprocessing}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+  \centering
+  \includegraphics[width=1\textwidth,trim={2cm 5cm 2cm 5cm}, clip]{misc/workflow_diversity_sig.pdf}
+  \caption{Inter-infant differences and Temporal Trajectories}
+  \label{fig:workflow_diversity_sig}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+  \centering
+  \includegraphics[width=1\textwidth,trim={2cm 7.3cm 2cm 6.8cm}, clip]{misc/workflow_outcome_meas.pdf}
+  \caption{Changes and Prediction of Behavioural Outcome Measures}
+  \label{fig:workflow_diversity_outcome}
+\end{subfigure}
+\caption{Workflow Analysis}
+\label{}
+\end{figure*}
+
+
+% \begin{figure*}[ht]
+%   \centering
+%   \includegraphics[width=1\textwidth,trim={2cm 2.5cm 2cm 2.5cm}, clip]{misc/qc_bases.jpg}
+%   \caption{ score per base position}
+%   \label{fig:_control}
+% \end{figure*}
+
 \section*{Results}
 \subsection*{Inter-Infant differences and temporal trajectories}
 % \textbf{Statistical Testing Alpha diversity}\\
@@ -190,7 +228,7 @@ PCoA on Bray–Curtis distances revealed distinct clusters by infant, with multi
 This first visual inspection indicated that the microbiome of infants differs strongly between each other. Within individual infants, the microbiome appears to change over time. However, when excluding the infant id information, no clear trends are observable across timepoints.
 
 % \textbf{Statistical Testing Beta diversity}\\
-Assessment of inter-infant differences using Adonis revealed significant differences between infants ($p<0.001$). Interestingly, significant differences were also observed between timepoints. The pairwise comparisons showed significant differences between 2 and 6 months ($p < 0.001$) and 4 and 6 months ($p<0.001$), while no significant difference was found between 2 and 4 months ($p = 0.295$). This suggests that the microbiome of 6 month old infants is very distinct from that of younger infants.\\
+Assessment of inter-infant differences in beta diversity using Adonis revealed significant differences between infants.($p<0.001$). Interestingly, significant differences were also observed between timepoints ($p<0.001$). The pairwise comparisons showed significant differences between 2 and 6 months ($p < 0.001$) and 4 and 6 months ($p<0.001$), while no significant difference was found between 2 and 4 months ($p = 0.295$). This suggests that the microbiome of 6 month old infants is very distinct from that of younger infants.\\
 Including both variable into the model revealed that the infant id ($R^2 = 0.64$) explains substantially more of the variance in the distance matrix than timepoint ($R^2 = 0.04$).  
 This also quantitatively confirms the observations from the PCoA analysis. Adonis shobwed that the effect of the infant is so strong that it can mask the effect of timepoint, explaining why no clear clustering by timepoint was observed when infant information was excluded.
 % TODO PCAO plots into Subfigures 
