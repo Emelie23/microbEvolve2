@@ -326,6 +326,11 @@ Prediction of sleep qualitity follows similar results.
 Generalizing to unseen timepoints of infants leads to very limited predictive performance (see Figure \ref{fig:pred_sleep_microbiome_lasso}).
 Using predicted pathway abundance as the model features decreases performance slightly compared to the raw microbiome composition data.
 The model trained on pathway abundance achieves a pooled $R^2 = 0.08$ and $RMSE = 0.13$ (see Figure \ref{fig:pred_sleep_pathway_lasso}).
+We hypothesized that providing pathway abundance as model features would make biologically relevant information more easily accessible to the model.
+Pathway abundance might relate more directly to physiological outcomes such as sleep quality and behavioural development.
+Due to the relatively small training data set size, making relevant information explicitly available is crucial. 
+In contrast, large models trained on more data might be able to infer abstract patters in the data.
+Poorer performance can also be explained in part by the introduction of additional noise and uncertainty through the functional prediction with PICRUSt2.
 The gradient boosted regressor performs worse than Lasso regression ($R^2=-0.30$, $RMSE=0.15$).
 Again, overfitting is the main cause of this poor performance.
 
