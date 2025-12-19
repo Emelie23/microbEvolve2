@@ -170,6 +170,7 @@ The enrichment rank of each pathway is determined by calculating $-\operatorname
 This sorted set is then used for preranked GSEA.
 
 \subsection*{Gut Microbiome Diversity and Behavioural Outcome}
+
 The dependence of each behavioural measure on other factors was assessed by looking into correlations. 
 Pearsons correlations were calculated between the behavioural outcome measures (behavioural development, sleep quality, sleep rhythmicity, and attenuated caring style) and with the age of the infants.
 To quantify the contribution of k-mer-based Shannon entropy to the outcome measures, a Mixed Linear Model is fit using QIIME longitudinal \cite{bokulich_q2-longitudinal_2018}.
@@ -177,7 +178,7 @@ By controlling for infant age and repeated sampling (infant id), we isolate the 
 
 \subsection*{Predicting Behaviour with Microbiome Composition}
 In order to investigate the influence of microbiome composition on behavioural measures, multiple machine learning models were trained. 
-"Behavioural Development" was predicted using center-log transformed abundance data, as recommended for compositional count data \cite{quinn_field_2019,gloor_microbiome_2017}. 
+``Behavioural Development'' was predicted using center-log transformed abundance data, as recommended for compositional count data \cite{quinn_field_2019,gloor_microbiome_2017}. 
 Nested cross-validation with hyperparamter tuning was performed for a Lasso and Gradient Boosted Regressor \cite{caspi_metacyc_2014}. 
 To assess generalizing capabilities of the model to unseen timepoints, the cross-validation splits were assigned non-overlapping groups based on infant id and timepoint.
 "Sleep Quality" was predicted with the same approach. 
@@ -257,22 +258,28 @@ This also quantitatively confirms the observations from the PCoA analysis. Adoni
 %   \label{fig:pcoa_infant_timepoint}
 % \end{figure}
 
-\subsection*{Differential Abundance / Temporal Trajectories}
+\subsection*{Temporal Trajectories in the Infant Gut Microbiome}
 
 Figure \ref{fig:relabundancefamilies} shows clear changes in microbiome composition over time. Enterobacteria and Bifidobacteria decrease slightly in abundance, whereas Veillonella increase in abundance and dominate the gut microbiome of older infants.
-Multiple members of the Bacillota phylum are significantly enriched ($q < 0.05$) at 6 months compared to two months, such as Phascolarctobacterium, Ruminococcus and Enterococcus. 
-Other members, such as Clostridum and Staphylococcus, are depleted significantly. 
-The gram-negative genus Klebsiella shows significantly lower abundance  at 6 months.
+Multiple members of the Bacillota phylum are significantly enriched  ($q < 0.05$) as indicated by ANCOM-BC2 at 6 months compared to two months, such as Phascolarctobacterium, Ruminococcus and Enterococcus. 
+Other members, such as Clostridum and Staphylococcus, are depleted significantly.
+The gram-negative genus Klebsiella shows significantly lower abundance at 6 months.
+Surprisingly, Veillonella do not show a significant difference in abundance.
 
 The taxa volatility plot for Veillonella show a general trend of increased abundance from 4 to 6 months. 
 Nevertheless, not all infants follow this trend, as multiple do not show increased abundance over time. 
 The inverse is true for the Enterobacteriaceae family, as there is a general decrease in abundance but two infants that show contradictory behaviour.
+This again highlights the high individualitiy of the infant gut microbiome.
 
-Differential abundance analysis of predicted pathway abundance in the gut microbiome at two and 6 months reveals multiple trends (see Figure \ref{fig:pathwaydiffabundance}). 
+Differential abundance analysis of predicted pathway abundance in the gut microbiome at two and 6 months reveals multiple trends (see Figure \ref{fig:pathwaydiffabundance}).
+These results need to be interpreted cautiously, as predicting functional potential with PICRUSt2 introduces additional noise and uncertainty which might not reflect the biological reality.
 Acetly-CoA fermentation (PWY-5676) is enriched 2-fold at 6 compared to 2 months. 
-Fucose and N-acetylneuraminate degradation is significantly depleted at 6 months. 
+This pathway is associated with short chain fatty acid digestion from fiber-containing foods.
+Fucose and N-acetylneuraminate degradation, which is linked to a breast-milk focused diet, is significantly depleted at 6 months. 
 Multiple pathways related to gram-negative bacteria (LPS synthesis, O-antigen biosynthesis and enterobacterial common antigen synthesis) are less abundant at 6 months.
 GSEA reveals no significantly enriched or depleted pathway sets between 2 and 6 months.
+This can be attributed to the high-level pathway grouping, as only level two pathway sets from MetaCyc were available to us.
+Subtle changes in biological niches can be overpowered due to the number of pathways in a set.
 
 \begin{figure}[ht]
   \centering
@@ -292,11 +299,12 @@ GSEA reveals no significantly enriched or depleted pathway sets between 2 and 6 
 
 Figure \ref{fig:corrheatmap} shows the correlation and corresponding significance levels of the outcome measures. 
 Sleep quality and sleep rhtyhmicity correlate positively with age. 
+This is to be expected, as most parents can tell a story about newborns sleeping irregularly and requiring lots of attention.
 Sleep rhythmicity also correlates positively with an attenuated caring style of parents.
 The behavioural development score correlates negatively with age. 
 
 K-mer based Shannon entropy does not have a significant effect on any outcome measure tested. 
-Figure \ref{fig:regshannon} does not show the results of the MLE model but rather a simple regression fitted on the data and only act as a visual aid for the following results.
+Figure \ref{fig:regshannon} does not show the results of the MLE model but rather a simple regression fitted on the data and only acts as a visual aid for the following results.
 The slope of the relationship between microbiome diversity and behavioural outcome is near zero for sleep quality and caring style with non-significant p-values ($p = 0.633,\; 0.904$ respectively).
 The effect of Shannon entropy on behavrioural development is slightly stronger ($\beta = 18.524$) but not significant ($p = 0.133$).
 Sleep rhythmicity has a moderately positive association with Shannon entropy ($\beta = 0.113$, $p = 0.052$). 
@@ -323,8 +331,9 @@ Naive prediction of behavioural development with microbiome composition without 
 The Lasso regression achieves an $RMSE$ of $16.4937 \pm 4.5039$ and $R^2$ of $0.4632 \pm 0.5222$ on the test splits.
 When taking into account dependence and enforcing generalization to unseen infant - timepoint combinations, performance drops drastically (see Figure \ref{fig:pred_behaviour_generalize_lasso}).
 Pooled $R^2$ and $RMSE$ drop or increase to 0.05 and 29.49 respectively.
-The gradient boosted regressor performs worse (pooled $R^2 = -0.20$, $RMSE = 33.19$) and shows optimistic training statistics (per-fold $RMSE = 0.0000 \pm 0.0000$, $R^2 = 1.0000 \pm 0.0000$). 
+The gradient boosted regressor performs worse (pooled $R^2 = -0.20$, $RMSE = 33.19$) and is plagued by overfitting as indicated by overly optimistic training statistics (per-fold $RMSE = 0.0000 \pm 0.0000$, $R^2 = 1.0000 \pm 0.0000$). 
 This indicates strong overfitting of the model on the training data which does not allow for generalization to the test data.
+The higher interal complexity of this model compared to a Lasso Regression has the advantage of potentially picking up abstract information in the data but also increases the risk of overfitting, which has happened here.
 
 Prediction of sleep qualitity follows similar results.
 Generalizing to unseen timepoints of infants leads to very limited predictive performance (see Figure \ref{fig:pred_sleep_microbiome_lasso}).
@@ -399,7 +408,7 @@ More sophisticated optimization and potentially hypothesis driven feature enrich
 
 \subsection*{Code and Data Availability}
 
-All code for the analysis mentioned in this report can be found on \href{https://github.com/Emelie23/microbEvolve2}{GitHub}.
+All code for the analysis mentioned in this report and additional work can be found on \href{https://github.com/Emelie23/microbEvolve2}{GitHub}.
 
 \clearpage
 % \twocolumn[
