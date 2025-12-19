@@ -43,7 +43,7 @@ def main():
     os.makedirs(ritme_base_dir, exist_ok=True)
 
     # Config is expected to be in scripts/ritme/ or similar
-    model_config_path = os.path.join(script_dir, "ritme", f"{experiment_name}.json")
+    model_config_path = os.path.join(script_dir, "config", f"{experiment_name}.json")
     
     print(f"Data directory: {data_dir}")
     print(f"Config path: {model_config_path}")

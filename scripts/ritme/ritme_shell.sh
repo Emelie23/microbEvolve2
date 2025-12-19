@@ -21,7 +21,7 @@ cd $HOME/microbEvolve2
 
 # ! USER SETTINGS HERE
 # -> config file to use
-CONFIG="scripts/ritme/v1_experiment.json"
+CONFIG="scripts/ritme/config/v1_experiment.json"
 # -> path to the metadata file
 PATH_MD="data/raw/metadata.tsv"
 # -> path to the feature table file
