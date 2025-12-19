@@ -102,24 +102,24 @@ We worked with the data from an observational longitudinal cohort study that fol
 \begin{subfigure}{\linewidth}
   \centering
   \includegraphics[width=1\linewidth,trim={2cm 8cm 2cm 9.5cm}, clip]{misc/workflow_preprocessing.pdf}
-  \caption{Workflow - Preprocessing}
+  \caption{Preprocessing}
   \label{fig:workflow_preprocessing}
 \end{subfigure}
 
 \begin{subfigure}{\linewidth}
   \centering
-  \includegraphics[width=1\textwidth,trim={2cm 4.5cm 2cm 6.5cm}, clip]{misc/workflow_diversity_sig.pdf}
-  \caption{Workflow - Inter-infant differences and Temporal Trajectories}
+  \includegraphics[width=1\textwidth,trim={2cm 5cm 2cm 5cm}, clip]{misc/workflow_diversity_sig.pdf}
+  \caption{Inter-infant differences and Temporal Trajectories}
   \label{fig:workflow_diversity_sig}
 \end{subfigure}
 
 \begin{subfigure}{\linewidth}
   \centering
-  \includegraphics[width=1\textwidth,trim={2cm 6.8cm 2cm 8.2cm}, clip]{misc/workflow_outcome_meas.pdf}
-  \caption{Workflow - Changes and prediction of behavioural outcome measures}
+  \includegraphics[width=1\textwidth,trim={2cm 7.3cm 2cm 6.8cm}, clip]{misc/workflow_outcome_meas.pdf}
+  \caption{Changes and Prediction of Behavioural Outcome Measures}
   \label{fig:workflow_diversity_outcome}
 \end{subfigure}
-\caption{}
+\caption{Workflow Analysis}
 \label{}
 \end{figure*}
 
@@ -171,7 +171,7 @@ This sorted set is then used for preranked GSEA.
 
 \subsection*{Gut Microbiome Diversity and Behavioural Outcome}
 The dependence of each behavioural measure on other factors was assessed by looking into correlations. 
-Pearson correlation of the behavioural measures Behavioural Development, Sleep Quality, Sleep Rhythmicity, and Attenuated Caring Style with each other and the age of the infants is calculated.
+Pearsons correlations were calculated between the behavioural outcome measures (behavioural development, sleep quality, sleep rhythmicity, and attenuated caring style) and with the age of the infants.
 To quantify the contribution of k-mer-based Shannon entropy to the outcome measures, a Mixed Linear Model is fit using QIIME longitudinal \cite{bokulich_q2-longitudinal_2018}.
 By controlling for infant age and repeated sampling (infant id), we isolate the effect of the gut microbiome diversity.
 
@@ -184,34 +184,6 @@ To assess generalizing capabilities of the model to unseen timepoints, the cross
 Additionally, pathway abundance as predicted by PICRUSt2 was used as model features.
 Performance was assessed by inspecting per-fold performance metrics for train and test set of the outer folds, as well as by calculating pooled performance metrics over all predictions.
 %TODO maybe explain here why full feature table?
-
-\begin{figure*}[p]
-\centering
-\captionsetup[subfigure]{justification=centering}
-\begin{subfigure}{\linewidth}
-  \centering
-  \includegraphics[width=1\linewidth,trim={2cm 8cm 2cm 9.5cm}, clip]{misc/workflow_preprocessing.pdf}
-  \caption{Preprocessing}
-  \label{fig:workflow_preprocessing}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-  \centering
-  \includegraphics[width=1\textwidth,trim={2cm 5cm 2cm 5cm}, clip]{misc/workflow_diversity_sig.pdf}
-  \caption{Inter-infant differences and Temporal Trajectories}
-  \label{fig:workflow_diversity_sig}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-  \centering
-  \includegraphics[width=1\textwidth,trim={2cm 7.3cm 2cm 6.8cm}, clip]{misc/workflow_outcome_meas.pdf}
-  \caption{Changes and Prediction of Behavioural Outcome Measures}
-  \label{fig:workflow_diversity_outcome}
-\end{subfigure}
-\caption{Workflow Analysis}
-\label{}
-\end{figure*}
-
 
 % \begin{figure*}[ht]
 %   \centering
@@ -242,25 +214,25 @@ This also quantitatively confirms the observations from the PCoA analysis. Adoni
 \begin{subfigure}{0.95\linewidth}
   \centering
   \includegraphics[width=0.9\linewidth, clip]{misc/infant_cluserting.pdf}
-  \caption{PcoA Bray-Curtis Infant}
+  \caption{Infant Clustering}
   \label{fig:pcoa_infant}
 \end{subfigure}
 
 \begin{subfigure}{0.95\linewidth}
   \centering
   \includegraphics[width=0.9\linewidth, clip]{misc/timepoint_cluserting.pdf}
-  \caption{PcoA Bray-Curtis Timepoint}
+  \caption{Timepoint CLustering}
   \label{fig:pcoa_timepoint}
 \end{subfigure}
 
 \begin{subfigure}{0.95\linewidth}
   \centering
   \includegraphics[width=0.9\linewidth, clip]{misc/timepoint_infant_cluserting.pdf}
-  \caption{PcoA Bray-Curtis Infant and Timepoint}
+  \caption{Infant and Timepoint CLustering}
   \label{fig:pcoa_infant_timepoint}
 \end{subfigure}
 
-    \caption{}
+    \caption{PCoA based on Bray-Curtis}
     \label{fig:}
 \end{figure}
 
